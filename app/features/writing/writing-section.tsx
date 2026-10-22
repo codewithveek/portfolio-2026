@@ -1,5 +1,5 @@
 import type { Article } from "~/content/schemas";
-import { getPrimaryTopicLabel } from "~/content/articles";
+import { getPrimaryTopicLabel } from "~/content/article-topics";
 import { ButtonLink } from "~/shared/ui/button";
 import { SectionKicker } from "~/shared/ui/section-kicker";
 

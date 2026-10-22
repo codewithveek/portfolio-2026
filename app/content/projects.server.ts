@@ -1,3 +1,5 @@
+import { stripPlaceholders } from "~/shared/lib/placeholder";
+
 import { projectFrontmatterSchema, type ProjectFrontmatter } from "./schemas";
 
 /**
@@ -29,7 +31,8 @@ export function parseProjects(modules: Record<string, unknown>): ProjectFrontmat
     .sort((first, second) => first.order - second.order);
 }
 
-const projects = parseProjects(frontmatterModules);
+// Validated with placeholders, then stripped for production (PRD §10.5).
+const projects = parseProjects(frontmatterModules).map((project) => stripPlaceholders(project));
 
 export function getProjects(): ProjectFrontmatter[] {
   return projects;

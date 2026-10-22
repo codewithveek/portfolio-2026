@@ -36,10 +36,10 @@ export function ProjectDetails({
       <Link
         to={`/work/${project.slug}`}
         viewTransition
+        aria-label={`Read case study: ${project.title}`}
         className="type-label group inline-flex w-fit items-center gap-2 border-b border-accent pb-1 text-text"
       >
         Read case study
-        <span className="sr-only">: {project.title}</span>
         <span
           aria-hidden="true"
           className="text-accent transition-transform group-hover:translate-x-1"

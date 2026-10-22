@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 
 import type { ArchitectureSpan } from "~/content/schemas";
+import { traceBarMix, traceTextClass } from "~/shared/ui/trace-colors";
 import { OrbitMotif } from "~/shared/ui/orbit-motif";
 
 interface ProjectCoverProps {
@@ -73,10 +74,12 @@ export function ProjectCover({
               height: "calc(var(--trace-row) - 6px)",
               left: `${span.start * 100}%`,
               width: `calc(${span.width * 100}% - 4px)`,
-              backgroundColor: `color-mix(in srgb, var(--color-accent) ${100 - span.depth * 16}%, var(--color-surface))`,
+              backgroundColor: `color-mix(in srgb, var(--color-accent) ${traceBarMix(span.depth)}%, var(--color-surface))`,
             }}
           >
-            <span className="truncate font-mono text-[10px] font-medium tracking-[0.08em] text-accent-ink uppercase md:text-[11px]">
+            <span
+              className={`truncate font-mono text-[10px] font-medium tracking-[0.08em] uppercase md:text-[11px] ${traceTextClass(span.depth)}`}
+            >
               {span.label}
             </span>
           </div>

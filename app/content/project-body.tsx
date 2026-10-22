@@ -6,6 +6,8 @@ const bodyModules = import.meta.glob<ComponentType>("./projects/*.mdx", {
   import: "default",
 });
 
-export function getProjectBody(slug: string): ComponentType | undefined {
-  return bodyModules[`./projects/${slug}.mdx`];
+/** Renders a project's MDX walkthrough, or nothing if the file has no body. */
+export function ProjectBody({ slug }: { slug: string }) {
+  const MdxBody = bodyModules[`./projects/${slug}.mdx`];
+  return MdxBody ? <MdxBody /> : null;
 }

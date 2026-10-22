@@ -5,30 +5,16 @@
     "vitest.config.ts",
     "playwright.config.ts",
     "drizzle.config.ts",
-    "react-router.config.ts",
-    "scripts/**/*",
-    "tests/**/*",
-    "app/**/*.test.ts",
-    "app/**/*.test.tsx",
-    "app/content/*.ts",
-    "app/features/writing/map-dev-article.ts",
-    "worker-configuration.d.ts",
-    "app/mdx.d.ts"
+    "react-router.config.ts"
   ],
   "compilerOptions": {
     "composite": true,
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    "types": ["node", "vite/client"],
-    "lib": ["DOM", "DOM.Iterable", "ES2023"],
+    "types": ["node"],
+    "lib": ["ES2023"],
     "target": "ES2022",
     "module": "ESNext",
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "jsx": "react-jsx",
-    "resolveJsonModule": true,
-    "paths": {
-      "~/*": ["./app/*"]
-    }
+    "moduleResolution": "bundler"
   }
 }

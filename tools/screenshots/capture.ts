@@ -35,7 +35,7 @@ for (const viewport of viewports) {
     await page.screenshot({ path: `${outputDirectory}/${slug}-${viewport.name}-fold.png` });
     // One viewport shot per section, scrolled into place, so sticky and pinned parts look real.
     const sectionOffsets = await page.evaluate(() =>
-      [...document.querySelectorAll("main section[id], main > section, footer")].map((element) => ({
+      [...document.querySelectorAll("main section, footer")].map((element) => ({
         id: element.id || element.getAttribute("aria-labelledby") || element.tagName.toLowerCase(),
         top: element.getBoundingClientRect().top + window.scrollY,
       })),

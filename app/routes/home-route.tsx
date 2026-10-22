@@ -1,7 +1,7 @@
 import { env } from "cloudflare:workers";
 import { redirect } from "react-router";
 
-import { getFeaturedArticles } from "~/content/articles";
+import { devArticles, getFeaturedArticles } from "~/content/articles";
 import { getProjects } from "~/content/projects.server";
 import { site } from "~/content/site";
 import { AboutSection } from "~/features/about/about-section";
@@ -34,6 +34,8 @@ export function loader({ request }: Route.LoaderArgs) {
   return {
     projects: getProjects().map(toProjectSummary),
     featuredArticles: getFeaturedArticles(),
+    articleCount: devArticles.articles.length,
+    articlesFetchedOn: devArticles.fetchedAt.slice(0, 10),
     turnstileSiteKey: env.TURNSTILE_SITE_KEY,
     isSentViaRedirect: url.searchParams.get("sent") === "1",
     renderedAt: Date.now(),
@@ -54,7 +56,10 @@ export default function HomeRoute({ loaderData, actionData }: Route.ComponentPro
       <main id="main">
         <HeroSection />
         <PositioningSection />
-        <ProofStrip />
+        <ProofStrip
+          articleCount={loaderData.articleCount}
+          articlesFetchedOn={loaderData.articlesFetchedOn}
+        />
         <WorkSection projects={loaderData.projects} />
         <AboutSection />
         <TestimonialsSection />

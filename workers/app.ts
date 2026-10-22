@@ -47,8 +47,10 @@ export default {
       return withHeaders(await renderWithRouter(request, nonce), nonce);
     }
 
-    const cache = caches.default;
-    const cacheKey = buildCacheKey(request, env.BUILD_ID);
+    // `caches.default` exists in Workers; the intersection keeps DOM-typed projects compiling too.
+    const cache = (caches as CacheStorage & { default: Cache }).default;
+    // The bundled build ID changes on every build; the BUILD_ID var lets CI pin it explicitly.
+    const cacheKey = buildCacheKey(request, `${env.BUILD_ID}:${import.meta.env.VITE_BUILD_ID}`);
     const cached = await cache.match(cacheKey);
     if (cached) {
       return withHeaders(replaceNonce(cached, nonce), nonce);

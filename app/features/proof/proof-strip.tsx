@@ -1,4 +1,3 @@
-import { getAllArticles, devArticles } from "~/content/articles";
 import { hackathonWins, maintainedPackages, scrimbaRole } from "~/content/proof";
 import { shouldShowPlaceholders } from "~/shared/lib/placeholder";
 
@@ -6,9 +5,15 @@ import { HackathonList } from "./hackathon-list";
 import { StatBlock } from "./stat-block";
 
 /** Four sourced stats under a hairline (PRD §6.4, §10.5). */
-export function ProofStrip() {
-  const articleCount = getAllArticles().length;
-  const fetchedOn = devArticles.fetchedAt.slice(0, 10);
+interface ProofStripProps {
+  /** Technical articles in the DEV snapshot, counted by the loader. */
+  articleCount: number;
+  /** When the DEV snapshot was fetched (YYYY-MM-DD). */
+  articlesFetchedOn: string;
+}
+
+export function ProofStrip({ articleCount, articlesFetchedOn }: ProofStripProps) {
+  const fetchedOn = articlesFetchedOn;
   const hasHackathonWins = hackathonWins.length > 0;
 
   return (

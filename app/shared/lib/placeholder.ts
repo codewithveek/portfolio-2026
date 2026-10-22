@@ -32,3 +32,27 @@ export function placeholderSafe<Value>(
   if (!showPlaceholders && containsPlaceholder(value)) return undefined;
   return value;
 }
+
+/**
+ * Deep copy with placeholders removed: array items that contain one are dropped and string
+ * fields that contain one become "". Loaders use it so `[Lucky]` text never reaches production
+ * HTML or hydration data.
+ */
+export function stripPlaceholders<Value>(
+  value: Value,
+  showPlaceholders: boolean = shouldShowPlaceholders,
+): Value {
+  if (showPlaceholders) return value;
+  return stripValue(value) as Value;
+}
+
+function stripValue(value: unknown): unknown {
+  if (typeof value === "string") return containsPlaceholder(value) ? "" : value;
+  if (Array.isArray(value)) {
+    return value.filter((item) => !containsPlaceholder(item)).map(stripValue);
+  }
+  if (value !== null && typeof value === "object") {
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, stripValue(item)]));
+  }
+  return value;
+}

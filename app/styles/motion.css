@@ -117,3 +117,15 @@
     position: static;
   }
 }
+
+/* line-draw for HTML trace bars (case-study diagram). */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-motion-ready] [data-reveal="bars"] [data-bar] {
+    transition: transform 0.9s var(--motion-ease-out-expo);
+    transition-delay: calc(var(--draw-index, 0) * 0.06s);
+  }
+
+  html[data-motion-ready] [data-reveal="bars"]:not([data-in-view]) [data-bar] {
+    transform: scaleX(0);
+  }
+}
