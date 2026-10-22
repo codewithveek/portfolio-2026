@@ -1,0 +1,48 @@
+/**
+ * Worker configuration (PRD §9.5).
+ * `routes` (custom domains) are added only at cutover (PRD §11, M6).
+ */
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "veek-portfolio",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "./workers/app.ts",
+  "observability": {
+    "enabled": true,
+  },
+  "upload_source_maps": true,
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "allowed_sender_addresses": ["contact@veek.me"],
+    },
+  ],
+  "ratelimits": [
+    {
+      "name": "CONTACT_RATE_LIMITER",
+      "namespace_id": "2601",
+      "simple": { "limit": 3, "period": 60 },
+    },
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "veek-portfolio",
+      // Replace with the id printed by `wrangler d1 create veek-portfolio` before the first deploy.
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "drizzle",
+    },
+  ],
+  "analytics_engine_datasets": [
+    {
+      "binding": "EVENTS",
+      "dataset": "veek_portfolio_events",
+    },
+  ],
+  "vars": {
+    // Turnstile's always-pass test site key; replace with the real public key before launch.
+    "TURNSTILE_SITE_KEY": "1x00000000000000000000AA",
+    "BUILD_ID": "dev",
+  },
+}

@@ -1,0 +1,360 @@
+@import "tailwindcss" source("..");
+
+/* Design tokens (PRD §7). Fonts are declared in root.tsx so the latin subset can be preloaded. */
+@theme {
+  --color-bg: #08080a;
+  --color-surface: #111114;
+  --color-surface-raised: #18181c;
+  --color-border: #2a2a2e;
+  --color-text: #ededed;
+  --color-text-muted: #a1a1a8;
+  --color-text-faint: #6b6b72;
+  --color-accent: #c6f432;
+  --color-accent-ink: #08080a;
+  --color-paper: #f2f0ea;
+  --color-paper-text: #111113;
+  --color-paper-muted: #5c5c63;
+  --color-accent-deep: #4d6600;
+
+  --font-sans: "Google Sans Flex", "Sans Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Mono Fallback", ui-monospace, monospace;
+
+  --radius-control: 2px;
+  --radius-card: 16px;
+  --radius-dock: 14px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@font-face {
+  font-family: "Sans Fallback";
+  src: local("Arial");
+  size-adjust: 104%;
+  ascent-override: 92%;
+  descent-override: 24%;
+}
+
+@font-face {
+  font-family: "Mono Fallback";
+  src: local("Courier New");
+  size-adjust: 100%;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    min-height: 100svh;
+    background: var(--color-bg);
+    font-size: 1rem;
+    line-height: 1.6;
+    font-variation-settings: "wdth" 100;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .paper :focus-visible {
+    outline-color: var(--color-accent-deep);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html:not(.lenis) {
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+/* Typography scale (PRD §7.2). */
+@layer components {
+  .type-display-xl {
+    font-size: clamp(3.5rem, 8.4vw, 8.5rem);
+    font-stretch: 140%;
+    font-variation-settings: "wdth" 140;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+  }
+
+  .type-display-lg {
+    font-size: clamp(2.5rem, 6vw, 6rem);
+    font-stretch: 130%;
+    font-variation-settings: "wdth" 130;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.9;
+    letter-spacing: -0.005em;
+  }
+
+  .type-heading-xl {
+    font-size: clamp(1.75rem, 3.2vw, 3rem);
+    font-variation-settings: "wdth" 100;
+    font-weight: 450;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .type-heading-md {
+    font-size: 1.5rem;
+    font-stretch: 110%;
+    font-variation-settings: "wdth" 110;
+    font-weight: 650;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  .type-body-lg {
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .type-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 1.4;
+    letter-spacing: 0.14em;
+  }
+
+  .layout-container {
+    width: 100%;
+    max-width: calc(1320px + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+    --gutter: 16px;
+
+    @media (width >= 768px) {
+      --gutter: 32px;
+    }
+
+    @media (width >= 1280px) {
+      --gutter: 96px;
+    }
+  }
+
+  .section-padding {
+    padding-block: clamp(6rem, 12vw, 10rem);
+  }
+
+  .grid-texture {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.03) 1px, transparent 1px);
+    background-size: 96px 96px;
+  }
+
+  .film-grain {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("/media/grain.png");
+    background-size: 128px 128px;
+  }
+
+  .tabular-nums-strict {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Buttons (PRD §8.4 "Button hover"): fill wipes left to right, arrow nudges. */
+@layer components {
+  .button {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-control);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    overflow: hidden;
+    cursor: pointer;
+    transition: color 180ms var(--ease-out-quart);
+  }
+
+  .button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 180ms var(--ease-out-quart);
+  }
+
+  .button:hover::before,
+  .button:focus-visible::before {
+    transform: scaleX(1);
+  }
+
+  .button .button-arrow {
+    display: inline-block;
+    transition: transform 180ms var(--ease-out-quart);
+  }
+
+  .button:hover .button-arrow,
+  .button:focus-visible .button-arrow {
+    transform: translateX(4px);
+  }
+
+  .button-primary {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+  }
+
+  .button-primary::before {
+    background: var(--color-text);
+  }
+
+  .button-outline {
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+  }
+
+  .button-outline::before {
+    background: var(--color-text);
+  }
+
+  .button-outline:hover,
+  .button-outline:focus-visible {
+    color: var(--color-bg);
+  }
+
+  .paper .button-outline {
+    border-color: var(--color-paper-text);
+    color: var(--color-paper-text);
+  }
+
+  .paper .button-outline::before {
+    background: var(--color-paper-text);
+  }
+
+  .paper .button-outline:hover,
+  .paper .button-outline:focus-visible {
+    color: var(--color-paper);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .button::before,
+    .button .button-arrow {
+      transition: none;
+    }
+
+    .button:hover .button-arrow,
+    .button:focus-visible .button-arrow {
+      transform: none;
+    }
+  }
+}
+
+/* Hero intro (PRD §8.4 "hero-intro"): pure CSS so it runs before hydration. */
+@layer components {
+  .mask-line {
+    display: block;
+    overflow-x: visible;
+    overflow-y: clip;
+    padding-bottom: 0.04em;
+  }
+
+  .mask-line > span {
+    display: block;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-intro-line > span {
+      animation: rise-from-mask 0.7s var(--ease-out-expo) both;
+      animation-delay: calc(var(--line-index, 0) * 80ms);
+    }
+
+    .hero-intro-fade {
+      animation: fade-up-keyframes 0.45s var(--ease-out-expo) 0.2s both;
+    }
+
+    .hero-intro-portrait {
+      animation: portrait-settle 1.2s var(--ease-out-expo) both;
+    }
+  }
+
+  @keyframes rise-from-mask {
+    from {
+      transform: translateY(105%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-up-keyframes {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes portrait-settle {
+    from {
+      opacity: 0;
+      transform: scale(1.06);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+/* Orbit motif time-based rotation (PRD §8.4 "orbit-drift"); JS takes over after hydration. */
+@layer components {
+  .orbit-motif {
+    color: var(--color-accent);
+  }
+}
+
+/* View transitions (PRD §8.4 "card-to-case-study"). */
+::view-transition-group(*) {
+  animation-duration: 0.35s;
+  animation-timing-function: var(--ease-out-expo);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.15s;
+  }
+}

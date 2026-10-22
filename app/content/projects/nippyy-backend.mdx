@@ -1,0 +1,52 @@
+---
+slug: nippyy-backend
+order: 5
+title: Nippyy backend
+tagline: Backend foundations for a cross-border fintech product.
+summary: Access control across nine fintech roles, NIBSS-compliant transaction utilities, an OCR extraction pipeline and distributed tracing, on Fastify and TypeScript.
+role: "[Lucky] role"
+period:
+  start: "[Lucky]"
+  end: null
+status: private
+stack: [TypeScript, Fastify, BullMQ, Google Cloud Vision, Claude tool use]
+links: {}
+cover:
+  alt: Trace diagram of the Nippyy backend, with access control, NIBSS utilities, OCR pipeline and integrations.
+metrics: []
+confidentiality: "Private repository. Diagrams and descriptions only. [Lucky] confirm what can be shown publicly."
+problem:
+  - A cross-border fintech product needs foundations that regulators, operators and auditors can all rely on before the first feature ships.
+  - That means fine-grained access control with approvals, transaction identifiers that match the national switch's spec, document intake that does not depend on manual typing, and requests that can be traced across services.
+architecture:
+  - { label: "fastify api", detail: "TypeScript", depth: 0, start: 0, width: 1 }
+  - { label: "correlation ids", detail: "Distributed tracing across every request", depth: 1, start: 0, width: 1 }
+  - { label: "access control", detail: "RBAC + ABAC + maker-checker across nine roles", depth: 2, start: 0, width: 0.32 }
+  - { label: "nibss utilities", detail: "Session IDs and transaction references", depth: 2, start: 0.34, width: 0.3 }
+  - { label: "ocr pipeline", detail: "Cloud Vision + Claude tool use on BullMQ", depth: 2, start: 0.66, width: 0.34 }
+  - { label: "integrations", detail: "Afriex, 9PSB", depth: 3, start: 0.34, width: 0.3 }
+decisions:
+  - chose: Combining RBAC, ABAC and maker-checker approvals
+    over: Roles alone
+    because: Fintech operations need rules that depend on the record, not only the role, and sensitive actions need a second person.
+    cost: A larger policy surface to test across nine roles.
+  - chose: A hybrid OCR pipeline (Google Cloud Vision plus Claude tool use)
+    over: A single OCR service
+    because: "[Lucky] confirm the reason for the hybrid design"
+    cost: Two providers to run, queue and monitor through BullMQ.
+shipped:
+  - Access-control module combining RBAC, ABAC and maker-checker approvals across nine fintech roles.
+  - NIBSS-compliant session ID and transaction reference utilities, validated against real transaction samples, including spec discrepancies found along the way.
+  - OCR and field-extraction pipeline with Google Cloud Vision and Claude tool use on BullMQ.
+  - Correlation IDs for distributed tracing, and integrations with Afriex and 9PSB.
+next:
+  - "[Lucky] what comes next"
+---
+
+Every request through the **Fastify** API carries a **correlation ID**, so a single operation can be traced across services and queues.
+
+The **access-control module** combines role-based and attribute-based rules with **maker-checker** approvals across nine fintech roles: one person proposes a sensitive action and another approves it.
+
+The **NIBSS utilities** generate and validate session IDs and transaction references. They were checked against real transaction samples, which surfaced discrepancies in the spec itself.
+
+Documents go through an **OCR and field-extraction pipeline**: Google Cloud Vision reads the page, Claude tool use extracts the fields, and BullMQ runs the jobs.

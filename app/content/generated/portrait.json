@@ -1,0 +1,25 @@
+{
+  "width": 1086,
+  "height": 1448,
+  "variants": [
+    {
+      "height": 800,
+      "width": 600,
+      "avifBytes": 12600,
+      "webpBytes": 21294
+    },
+    {
+      "height": 1200,
+      "width": 900,
+      "avifBytes": 23560,
+      "webpBytes": 42388
+    },
+    {
+      "height": 1448,
+      "width": 1086,
+      "avifBytes": 31493,
+      "webpBytes": 57584
+    }
+  ],
+  "placeholder": "data:image/webp;base64,UklGRpABAABXRUJQVlA4WAoAAAAQAAAAEQAAFwAAQUxQSPoAAAANgCBJsmmr+zzbtr/2vxTbxvO7OvNx7ltDREwAjFRBep4ItoxWW/Hp3Zu9RbCx3wxvbg6fPRMR7zbhJJ2rWxvyD4xlleh0evNlwzegtIChoLsFhKCQIj4CgNAbN6LEBMtSsYB4okiKYfnilbIsNfj0adGgZ1Y8pRoH5fnd3QeAQLaReHsB4u1+CbdngCqM+/rZBhjI1VrqFUz0e2IJAFACuUqSqHTpigEEknlE68mZCA0AqVioWJ4Q/qtpuJX+FIG/nj5na9oV+git72k+vdbaD5jNGAtbGttOF7HV1zqSioVpkqUVfT16CDaHJRNh68D3xe2yulczAYQAVlA4IHAAAADwBACdASoSABgAPu1iqlAppSOisBgIATAdiWUAwowQABkU33CE4x5SFBqHGQ42MfgA/ujofjBO+bI0nG/l087OCo7ub3c7ykTNszhPLJrs/cOtXdXN+7fSdOUdff4Xd9sLFmB+70ynmZJILXO+IQAA"
+}

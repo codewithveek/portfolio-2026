@@ -1,0 +1,55 @@
+---
+slug: cutroom
+order: 4
+title: Cutroom
+tagline: Turn a codebase into product videos, on open models.
+summary: Reads a repo, writes a brief where every feature cites file-and-line evidence, audits every claim against the code, and renders the video.
+role: Creator
+period:
+  start: "2026-10"
+  end: null
+status: hackathon
+stack: [TypeScript, Remotion, Gemma, Kokoro, Node.js]
+links:
+  npm: https://www.npmjs.com/package/cutroom
+  article: https://dev.to/codewithveek/we-ship-every-week-now-our-launch-videos-dont-so-i-built-cutroom-n3l
+cover:
+  alt: Trace diagram of Cutroom's pipeline, from reading a repository to a rendered, loudness-normalised video.
+metrics: []
+problem:
+  - Teams ship every week, but launch videos take days, so most releases go out without one.
+  - Generated videos have a worse problem than effort. They make claims the product does not support.
+  - Cutroom writes the video from the code itself and checks every claim against that code before anything renders.
+architecture:
+  - { label: "cutroom", detail: "npx cutroom demo", depth: 0, start: 0, width: 1 }
+  - { label: "read repo", detail: "Secrets redacted first", depth: 1, start: 0, width: 0.16 }
+  - { label: "product brief", detail: "Every feature cites file and line", depth: 1, start: 0.17, width: 0.17 }
+  - { label: "storyboard", detail: "Scenes and narration", depth: 1, start: 0.35, width: 0.15 }
+  - { label: "claim audit", detail: "UI labels, code, numbers, commands, then a Gemma judge", depth: 1, start: 0.51, width: 0.2 }
+  - { label: "human approval", detail: "Nothing renders unapproved", depth: 1, start: 0.72, width: 0.12 }
+  - { label: "render", detail: "Remotion, −16 LUFS", depth: 1, start: 0.85, width: 0.15 }
+  - { label: "local mode", detail: "Gemma + Kokoro, privacy and egress guards in code", depth: 2, start: 0, width: 1 }
+decisions:
+  - chose: Auditing every claim against the code
+    over: Trusting the model's script
+    because: A launch video that shows a feature the product lacks does more harm than no video.
+    cost: Extra pipeline stages and slower runs.
+  - chose: A fully offline local mode with guards enforced in code
+    over: A privacy promise in the README
+    because: Teams can point Cutroom at private repositories knowing nothing leaves the machine.
+    cost: Open models that run locally are smaller than hosted ones.
+shipped:
+  - Built for the DEV Hacktoberfest 2026 open-source AI challenge.
+  - Published on npm as cutroom (npx cutroom demo), with deploy buttons for Render and DigitalOcean.
+  - Local mode runs fully offline with Gemma reasoning and Kokoro voice.
+next:
+  - Launch cutroom.tech.
+---
+
+Cutroom starts by **reading the repository**, redacting secrets before anything else sees the code.
+
+It writes a **product brief** in which every feature cites file-and-line evidence, then a **storyboard**. Before rendering, it **audits every claim** against the code: UI labels, code excerpts, numbers and commands, and finally a Gemma judge.
+
+A person approves the cut. Then **Remotion** renders the video and the audio is normalised to −16 LUFS.
+
+In **local mode** the whole pipeline runs offline, with Gemma for reasoning and Kokoro for the voice. A privacy guard and an egress guard are enforced in code, not in documentation.

@@ -1,0 +1,402 @@
+{
+  "fetchedAt": "2026-10-22T15:22:08.540Z",
+  "source": "https://dev.to/api/articles?username=codewithveek",
+  "articles": [
+    {
+      "title": "We ship every week now. Our launch videos don't. So I built Cutroom.",
+      "url": "https://dev.to/codewithveek/we-ship-every-week-now-our-launch-videos-dont-so-i-built-cutroom-n3l",
+      "publishedAt": "2026-10-19T06:21:21.000Z",
+      "readingTimeMinutes": 8,
+      "tags": [
+        "devchallenge",
+        "hf26challenge"
+      ],
+      "publication": "codewithveek"
+    },
+    {
+      "title": "Afriex Integrations: Sandbox, Idempotency, and Webhook Simulation",
+      "url": "https://dev.to/afriex/afriex-integrations-sandbox-idempotency-and-webhook-simulation-4k0j",
+      "publishedAt": "2026-09-21T19:50:13.000Z",
+      "readingTimeMinutes": 5,
+      "tags": [
+        "afriex",
+        "webhook",
+        "sandbox",
+        "payment"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "Introducing Vetit - AI agent that audits MCPs",
+      "url": "https://dev.to/codewithveek/introducing-vetit-ai-agent-that-audits-mcps-44o9",
+      "publishedAt": "2026-08-30T19:09:59.000Z",
+      "readingTimeMinutes": 2,
+      "tags": [
+        "ai",
+        "agents",
+        "trueforge",
+        "mcp"
+      ],
+      "publication": "codewithveek"
+    },
+    {
+      "title": "How to Collect Mobile Money Payments for Your SaaS Through Afriex",
+      "url": "https://dev.to/afriex/how-to-collect-mobile-money-payments-for-your-saas-through-afriex-2kgo",
+      "publishedAt": "2026-08-28T18:23:48.000Z",
+      "readingTimeMinutes": 7,
+      "tags": [
+        "crossborder",
+        "saas",
+        "afriex",
+        "mobilemoney"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "Build a Digital Marketplace with Afriex, Fastify and Postgres, Part 2: Checkout and Payouts",
+      "url": "https://dev.to/afriex/build-a-digital-marketplace-with-afriex-fastify-and-postgres-part-2-checkout-and-payouts-3g7m",
+      "publishedAt": "2026-08-16T06:30:00.000Z",
+      "readingTimeMinutes": 10,
+      "tags": [
+        "afriex",
+        "payments",
+        "marketplace",
+        "crossborder"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "Build a Digital Marketplace with Afriex, Fastify and Postgres, Part 1: Data Model and the Storefront",
+      "url": "https://dev.to/afriex/build-a-digital-marketplace-with-afriex-fastify-and-postgres-part-1-data-model-and-the-storefront-mej",
+      "publishedAt": "2026-08-15T18:25:07.000Z",
+      "readingTimeMinutes": 12,
+      "tags": [
+        "afriex",
+        "marketplace",
+        "payments",
+        "crossborder"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "How to Accept International Payments as an African Developer or Business",
+      "url": "https://dev.to/afriex/how-to-accept-international-payments-as-an-african-developer-or-business-33eh",
+      "publishedAt": "2026-07-30T18:44:40.000Z",
+      "readingTimeMinutes": 8,
+      "tags": [
+        "crossborder",
+        "afriex",
+        "payments",
+        "api"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "AI Agent observability with DriftWatch and SigNoz",
+      "url": "https://dev.to/codewithveek/ai-agent-observability-with-driftwatch-and-signoz-f8p",
+      "publishedAt": "2026-07-26T14:36:01.000Z",
+      "readingTimeMinutes": 8,
+      "tags": [
+        "signoz",
+        "ai",
+        "observability",
+        "opentelemetry"
+      ],
+      "publication": "codewithveek"
+    },
+    {
+      "title": "Detecting AI Agent Behavioral Drift with OpenTelemetry and SigNoz",
+      "url": "https://dev.to/codewithveek/detecting-ai-agent-behavioral-drift-with-opentelemetry-and-signoz-3d98",
+      "publishedAt": "2026-07-19T22:35:39.000Z",
+      "readingTimeMinutes": 6,
+      "tags": [
+        "ai",
+        "agents",
+        "otel",
+        "signoz"
+      ],
+      "publication": "codewithveek"
+    },
+    {
+      "title": "Build a Remittance App with the Afriex Cross-border API",
+      "url": "https://dev.to/afriex/build-a-remittance-app-with-the-afriex-business-api-1adg",
+      "publishedAt": "2026-06-30T22:54:02.000Z",
+      "readingTimeMinutes": 7,
+      "tags": [
+        "afriex",
+        "fintech",
+        "crossborder",
+        "api"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "How to Accept USDT and USDC Payments and Settle Automatically in USD with Afriex",
+      "url": "https://dev.to/afriex/how-to-accept-usdt-and-usdc-payments-and-settle-automatically-in-usd-with-afriex-2m79",
+      "publishedAt": "2026-06-22T11:16:12.000Z",
+      "readingTimeMinutes": 5,
+      "tags": [
+        "afriex",
+        "crypto",
+        "crossborder",
+        "payments"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "Afriex Virtual Accounts: A Developer's Guide to Dedicated and Pool Accounts",
+      "url": "https://dev.to/afriex/afriex-virtual-accounts-a-developers-guide-to-dedicated-and-pool-accounts-260b",
+      "publishedAt": "2026-06-20T09:56:25.000Z",
+      "readingTimeMinutes": 7,
+      "tags": [
+        "afriex",
+        "fintech",
+        "crossborder",
+        "virtual"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "What Afriex's Visa Direct Partnership Means for Users and Developers",
+      "url": "https://dev.to/afriex/what-afriexs-visa-direct-partnership-means-for-users-and-developers-bl2",
+      "publishedAt": "2026-06-17T08:42:51.000Z",
+      "readingTimeMinutes": 4,
+      "tags": [
+        "afriex",
+        "crossborder",
+        "visa",
+        "fintech"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "Accept Payments in Minutes with Afriex Checkout Sessions",
+      "url": "https://dev.to/afriex/accept-payments-in-minutes-with-afriex-checkout-sessions-3j1m",
+      "publishedAt": "2026-05-30T16:48:17.000Z",
+      "readingTimeMinutes": 8,
+      "tags": [
+        "afriex",
+        "stripe",
+        "fintech",
+        "crossborder"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "Afriex vs Flutterwave vs Paystack: Which One Should You Choose?",
+      "url": "https://dev.to/afriex/afriex-vs-flutterwave-vs-paystack-which-one-should-you-use-for-payouts-and-disbursements-20jc",
+      "publishedAt": "2026-05-25T12:56:13.000Z",
+      "readingTimeMinutes": 7,
+      "tags": [
+        "afriex",
+        "crossborder",
+        "fintech",
+        "stripe"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "Afriex Webhook Integration Guide: Signature Verification, Event Handling, and Production Best Practices",
+      "url": "https://dev.to/afriex/afriex-webhook-integration-guide-signature-verification-event-handling-and-production-best-3c9o",
+      "publishedAt": "2026-05-25T01:17:44.000Z",
+      "readingTimeMinutes": 8,
+      "tags": [
+        "afriex",
+        "devex",
+        "security",
+        "tutorial"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "How Agentic AI Is Changing Cross-Border Payments (and What It Means for Developers)",
+      "url": "https://dev.to/afriex/how-agentic-ai-is-changing-cross-border-payments-and-what-it-means-for-developers-3m12",
+      "publishedAt": "2026-05-24T06:21:36.000Z",
+      "readingTimeMinutes": 7,
+      "tags": [
+        "ai",
+        "fintech",
+        "afriex",
+        "agents"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "Build Cross-Border Payment AI Agents with the Afriex MCP Server",
+      "url": "https://dev.to/afriex/build-cross-border-payment-ai-agents-with-the-afriex-mcp-server-2l5j",
+      "publishedAt": "2026-05-02T04:20:50.000Z",
+      "readingTimeMinutes": 5,
+      "tags": [
+        "ai",
+        "agents",
+        "mcp",
+        "afriex"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "Model Context Protocol: The Standard That Lets AI Agents Actually Do Things",
+      "url": "https://dev.to/codewithveek/model-context-protocol-the-standard-that-lets-ai-agents-actually-do-things-4coj",
+      "publishedAt": "2026-05-02T03:54:44.000Z",
+      "readingTimeMinutes": 5,
+      "tags": [
+        "ai",
+        "agents",
+        "mcp",
+        "afriex"
+      ],
+      "publication": "codewithveek"
+    },
+    {
+      "title": "TiDB for AI Memory: Vector Search, HTAP, and Horizontal Scaling in One Database",
+      "url": "https://dev.to/codewithveek/tidb-for-ai-memory-vector-search-htap-and-horizontal-scaling-in-one-database-3376",
+      "publishedAt": "2026-04-19T15:34:44.000Z",
+      "readingTimeMinutes": 18,
+      "tags": [
+        "database",
+        "tidb",
+        "ai",
+        "vectordatabase"
+      ],
+      "publication": "codewithveek"
+    },
+    {
+      "title": "AI Memory Systems: Everything You Need to Know",
+      "url": "https://dev.to/codewithveek/ai-memory-systems-everything-you-need-to-know-35n0",
+      "publishedAt": "2026-04-19T15:14:43.000Z",
+      "readingTimeMinutes": 16,
+      "tags": [
+        "ai",
+        "openai",
+        "claude",
+        "tidb"
+      ],
+      "publication": "codewithveek"
+    },
+    {
+      "title": "What the African Fintech Infrastructure Stack Looks Like in 2026",
+      "url": "https://dev.to/afriex/what-the-african-fintech-infrastructure-stack-looks-like-in-2026-2cjl",
+      "publishedAt": "2026-04-17T10:02:42.000Z",
+      "readingTimeMinutes": 8,
+      "tags": [
+        "fintech",
+        "afriex",
+        "crossborder",
+        "payments"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "Why Most Payment APIs Fail Developers Building for African Markets",
+      "url": "https://dev.to/afriex/why-most-payment-apis-fail-developers-building-for-african-markets-4dfj",
+      "publishedAt": "2026-04-15T14:34:04.000Z",
+      "readingTimeMinutes": 6,
+      "tags": [
+        "api",
+        "fintech",
+        "developer",
+        "architecture"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "Build a Freelancer Payout Platform with the Afriex SDK and Next.js",
+      "url": "https://dev.to/afriex/build-a-freelancer-payout-platform-with-the-afriex-sdk-and-nextjs-2oc8",
+      "publishedAt": "2026-04-12T08:32:31.000Z",
+      "readingTimeMinutes": 13,
+      "tags": [
+        "webdev",
+        "freelance",
+        "afriex",
+        "tutorial"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "5 Products You Can Build with Afriex Cross-Border Payment API",
+      "url": "https://dev.to/afriex/5-products-you-can-build-with-the-afriex-cross-border-payment-api-4ili",
+      "publishedAt": "2026-04-02T02:09:31.000Z",
+      "readingTimeMinutes": 8,
+      "tags": [
+        "afriex",
+        "crossborder",
+        "api"
+      ],
+      "publication": "Afriex"
+    },
+    {
+      "title": "From RAG to Agents: How TiDB Powers Modern AI Applications",
+      "url": "https://dev.to/codewithveek/from-rag-to-agents-how-tidb-powers-modern-ai-applications-3blc",
+      "publishedAt": "2026-02-18T11:34:03.000Z",
+      "readingTimeMinutes": 11,
+      "tags": [
+        "ai",
+        "agents",
+        "vectordatabase",
+        "sql"
+      ],
+      "publication": "codewithveek"
+    },
+    {
+      "title": "Understanding TOCTOU: The Race Condition Hiding in Your Code",
+      "url": "https://dev.to/codewithveek/understanding-toctou-the-race-condition-hiding-in-your-code-43nh",
+      "publishedAt": "2026-02-15T13:30:45.000Z",
+      "readingTimeMinutes": 4,
+      "tags": [
+        "webdev",
+        "vulnerabilities",
+        "ai",
+        "programming"
+      ],
+      "publication": "codewithveek"
+    },
+    {
+      "title": "How to Fix \"Cannot Access '[variable]' Before Initialization\" in Next.js",
+      "url": "https://dev.to/codewithveek/how-to-fix-cannot-access-variable-before-initialization-in-nextjs-226k",
+      "publishedAt": "2025-07-22T11:27:43.000Z",
+      "readingTimeMinutes": 3,
+      "tags": [
+        "webdev",
+        "nextjs",
+        "beginners",
+        "javascript"
+      ],
+      "publication": "codewithveek"
+    },
+    {
+      "title": "The AI Paradox: Why I Use But Don't Trust Artificial Intelligence in 2025",
+      "url": "https://dev.to/codewithveek/the-ai-paradox-why-i-use-but-dont-trust-artificial-intelligence-in-2025-43ej",
+      "publishedAt": "2025-03-10T16:50:54.000Z",
+      "readingTimeMinutes": 3,
+      "tags": [
+        "programming",
+        "ai",
+        "developerlifestyle"
+      ],
+      "publication": "codewithveek"
+    },
+    {
+      "title": "How to Fix the \"Detected Multiple Renderers Concurrently Rendering the Same Context Provider\" Warning in Next.js",
+      "url": "https://dev.to/codewithveek/how-to-fix-the-detected-multiple-renderers-concurrently-rendering-the-same-context-provider-4o09",
+      "publishedAt": "2025-01-25T22:17:44.000Z",
+      "readingTimeMinutes": 4,
+      "tags": [
+        "nextjs",
+        "help",
+        "react"
+      ],
+      "publication": "codewithveek"
+    },
+    {
+      "title": "How to Set Up a Next.js Project from Scratch",
+      "url": "https://dev.to/codewithveek/how-to-set-up-a-nextjs-project-from-scratch-7p",
+      "publishedAt": "2025-01-25T18:22:11.000Z",
+      "readingTimeMinutes": 4,
+      "tags": [
+        "beginners",
+        "nextjs"
+      ],
+      "publication": "codewithveek"
+    }
+  ]
+}

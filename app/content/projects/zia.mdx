@@ -1,0 +1,62 @@
+---
+slug: zia
+order: 1
+title: Zia
+tagline: Inventory forecasting and reordering for Shopify merchants.
+summary: An embedded Shopify app and standalone dashboard for purchase orders, supplier mapping and rule-based forecasts. Built and run end to end.
+role: Founder & engineer, end to end
+period:
+  start: "2026-07"
+  end: null
+status: live
+stack: [TypeScript, React, Node.js, Cloudflare Workers, TiDB, better-auth, Shopify]
+links:
+  live: https://getzia.xyz
+cover:
+  alt: Trace diagram of Zia's two builds, Node and Cloudflare Workers, sharing TiDB and better-auth.
+metrics: []
+confidentiality: The repository is private. This page shows architecture and product behaviour only.
+problem:
+  - Shopify merchants reorder stock from spreadsheets and memory. They find out a product is out of stock when a customer cannot buy it.
+  - Zia turns sales history and supplier details into purchase orders. Forecasts are rule-based and explainable, and are not marketed as AI.
+  - It has to work inside Shopify admin as an embedded app and as a standalone dashboard, with billing, seats and data a merchant can trust.
+architecture:
+  - { label: "zia", detail: "One product, two builds kept in feature parity", depth: 0, start: 0, width: 1 }
+  - { label: "node build", detail: "server/ + client/", depth: 1, start: 0, width: 0.48 }
+  - { label: "workers build", detail: "cloudflare/api + cloudflare/web", depth: 1, start: 0.52, width: 0.48 }
+  - { label: "better-auth", detail: "Organisations, 2FA, admin, API keys", depth: 2, start: 0, width: 0.3 }
+  - { label: "shopify sync", detail: "Products, orders and billing", depth: 2, start: 0.32, width: 0.3 }
+  - { label: "forecasts + POs", detail: "Rule-based reorder points, supplier mapping", depth: 2, start: 0.64, width: 0.36 }
+  - { label: "tidb", detail: "Shared data layer", depth: 3, start: 0, width: 0.62 }
+  - { label: "staff console", detail: "Own Worker, required 2FA, roles, audit log", depth: 3, start: 0.64, width: 0.36 }
+decisions:
+  - chose: Two builds kept in feature parity, Node and Cloudflare Workers
+    over: A single runtime
+    because: "[Lucky] explain why both builds exist"
+    cost: Every feature ships twice and parity has to be checked on each change.
+  - chose: Rule-based forecasts
+    over: Marketing the forecasts as AI
+    because: A merchant has to understand why Zia suggests a reorder before trusting it with money.
+    cost: The rules need tuning per store instead of learning on their own.
+  - chose: A separate Worker for the internal staff console
+    over: Admin routes inside the customer app
+    because: Staff access gets its own accounts, required 2FA, roles and an audit log, away from customer sessions.
+    cost: A second deployment to run and keep in sync.
+shipped:
+  - Embedded Shopify app and standalone dashboard, live at getzia.xyz.
+  - Purchase orders, supplier mapping and rule-based forecasts.
+  - Shopify sync and billing with Starter, Growth and Scale plans and plan-based seat limits.
+  - API keys, and 30-day soft-delete and restore of organisations.
+  - Zia AI assistant on a model-agnostic harness, with monthly AI credits and actions that need confirmation.
+  - Internal staff console with owner, admin, support and analyst roles.
+next:
+  - "[Lucky] what comes next for Zia"
+---
+
+Zia is one product with two builds. The **Node build** (`server/` and `client/`) and the **Cloudflare Workers build** (`cloudflare/api` and `cloudflare/web`) share TiDB and the same feature set, and every change lands in both.
+
+Authentication runs on better-auth: organisations, two-factor authentication, admin tooling and API keys. Plans (Starter, Growth, Scale) set seat limits, and an organisation that is deleted stays restorable for 30 days.
+
+The **Zia AI assistant** sits on a model-agnostic harness. Merchants get monthly AI credits, and any action that changes data waits for the merchant to confirm it.
+
+The **staff console** runs on its own Worker with separate staff accounts, required 2FA, owner/admin/support/analyst roles and an audit log of every action.

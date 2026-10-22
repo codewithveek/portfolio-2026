@@ -1,0 +1,56 @@
+---
+slug: driftwatch
+order: 3
+title: DriftWatch
+tagline: A self-observing AI agent SDK.
+summary: Traces every tool call and model step as OpenTelemetry, watches that telemetry for behavioural drift, and lets a policy-driven autopilot respond.
+role: Creator & maintainer
+period:
+  start: "2026-07"
+  end: null
+status: open-source
+stack: [TypeScript, OpenTelemetry, Vercel AI SDK, SigNoz, pnpm workspaces]
+links:
+  npm: https://www.npmjs.com/package/@driftwatch/sdk
+  docs: https://drift-watch-docs.vercel.app
+  article: https://dev.to/codewithveek/detecting-ai-agent-behavioral-drift-with-opentelemetry-and-signoz-3d98
+cover:
+  alt: Trace diagram of DriftWatch, with agent steps traced as OpenTelemetry spans, a drift watcher and a policy autopilot.
+metrics: []
+problem:
+  - An agent that worked yesterday can behave differently today. The tool-call mix shifts, errors creep up, latency and token spend grow, and nobody notices until a user does.
+  - Traditional monitoring sees requests and errors, not behaviour. DriftWatch treats the agent's own steps as telemetry and watches them for drift.
+architecture:
+  - { label: "agent (vercel ai sdk)", detail: "Your agent, your providers", depth: 0, start: 0, width: 1 }
+  - { label: "@driftwatch/sdk", detail: "Every tool call and model step as an OpenTelemetry span", depth: 1, start: 0, width: 0.7 }
+  - { label: "otel export", detail: "SigNoz or any OTLP backend", depth: 1, start: 0.72, width: 0.28 }
+  - { label: "drift watcher", detail: "Tool-call mix, error rate, latency, token spend", depth: 2, start: 0.08, width: 0.44 }
+  - { label: "@driftwatch/autopilot", detail: "Notify, pause, roll back or throttle", depth: 3, start: 0.2, width: 0.42 }
+  - { label: "human approval", detail: "Required for destructive actions", depth: 4, start: 0.36, width: 0.26 }
+  - { label: "server + console", detail: "@driftwatch/server, @driftwatch/console", depth: 2, start: 0.56, width: 0.44 }
+decisions:
+  - chose: Layering over the Vercel AI SDK
+    over: Shipping provider SDKs
+    because: Teams keep the providers and models they already use; DriftWatch brings no provider SDKs of its own.
+    cost: Agents built on other frameworks need an adapter.
+  - chose: OpenTelemetry as the trace format
+    over: A custom event schema
+    because: Traces land in backends teams already run, such as SigNoz.
+    cost: Agent concepts have to be mapped onto generic span attributes.
+  - chose: Human approval for destructive autopilot actions
+    over: Fully automatic remediation
+    because: Pausing or rolling back an agent in production should never surprise its owners.
+    cost: Slower response when a person is not around.
+shipped:
+  - MIT-licensed pnpm monorepo (Node ≥ 22) with @driftwatch/sdk, @driftwatch/autopilot, @driftwatch/server and @driftwatch/console.
+  - The SDK reads no environment variables itself; configuration is explicit.
+  - Docs at drift-watch-docs.vercel.app and two articles on drift detection with SigNoz.
+next:
+  - "[Lucky] what comes next for DriftWatch"
+---
+
+DriftWatch wraps an agent built on the **Vercel AI SDK**. Every tool call and model step becomes an **OpenTelemetry** span, so the agent's behaviour shows up in SigNoz or any OTLP backend next to the rest of the system.
+
+A **watcher** model reads that telemetry and looks for drift: changes in the tool-call mix, error rate, latency and token spend.
+
+When drift crosses a policy, **`@driftwatch/autopilot`** responds. It can notify, pause, roll back or throttle, and destructive actions wait for a human to approve them. `@driftwatch/server` and `@driftwatch/console` give the team a place to see and act on it.

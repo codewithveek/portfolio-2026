@@ -1,0 +1,10 @@
+pnpm-lock.yaml
+worker-configuration.d.ts
+app/content/generated/
+drizzle/meta/
+build/
+.react-router/
+.wrangler/
+docs/
+public/
+*.mdx

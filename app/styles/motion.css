@@ -1,0 +1,119 @@
+/*
+ * Motion patterns driven by CSS (PRD §8.4). Values mirror app/shared/motion/motion-tokens.ts
+ * (checked by motion-tokens.test.ts). Hidden initial states apply only once
+ * <html data-motion-ready> is set after hydration (PRD §8.1, CLAUDE.md motion rules).
+ */
+:root {
+  --motion-ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+  --motion-ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --motion-duration-instant: 0.12s;
+  --motion-duration-fast: 0.18s;
+  --motion-duration-base: 0.45s;
+  --motion-duration-slow: 0.7s;
+  --motion-duration-scenic: 1.2s;
+  --motion-stagger-tight: 0.04s;
+  --motion-stagger-base: 0.08s;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* fade-up */
+  html[data-motion-ready] [data-reveal="fade-up"] {
+    transition:
+      opacity var(--motion-duration-base) var(--motion-ease-out-expo),
+      transform var(--motion-duration-base) var(--motion-ease-out-expo);
+    transition-delay: calc(var(--reveal-index, 0) * var(--motion-stagger-base));
+  }
+
+  html[data-motion-ready] [data-reveal="fade-up"]:not([data-in-view]) {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  /* blur-in */
+  html[data-motion-ready] [data-reveal="blur-in"] {
+    transition:
+      opacity 0.6s var(--motion-ease-out-expo),
+      filter 0.6s var(--motion-ease-out-expo);
+  }
+
+  html[data-motion-ready] [data-reveal="blur-in"]:not([data-in-view]) {
+    opacity: 0.2;
+    filter: blur(8px);
+  }
+
+  /* mask-reveal: lines rise inside an overflow-hidden mask */
+  html[data-motion-ready] [data-reveal="mask"] .mask-line > span {
+    transition: transform var(--motion-duration-slow) var(--motion-ease-out-expo);
+    transition-delay: calc(var(--line-index, 0) * var(--motion-stagger-base));
+  }
+
+  html[data-motion-ready] [data-reveal="mask"]:not([data-in-view]) .mask-line > span {
+    transform: translateY(105%);
+  }
+
+  /* line-draw: SVG strokes draw in */
+  html[data-motion-ready] [data-reveal="line-draw"] [data-draw] {
+    stroke-dasharray: 1;
+    transition: stroke-dashoffset 0.9s var(--motion-ease-out-expo);
+    transition-delay: calc(var(--draw-index, 0) * 0.06s);
+  }
+
+  html[data-motion-ready] [data-reveal="line-draw"]:not([data-in-view]) [data-draw] {
+    stroke-dashoffset: 1;
+  }
+}
+
+/* Reduced motion keeps short fades only (PRD §8.1 rule 5). */
+@media (prefers-reduced-motion: reduce) {
+  html[data-motion-ready] [data-reveal="fade-up"] {
+    transition: opacity var(--motion-duration-fast) linear;
+  }
+}
+
+/* Positioning pin (PRD §6.3): pinned only with scripting and without reduced motion. */
+.positioning-inner {
+  padding-block: clamp(6rem, 12vw, 10rem);
+}
+
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .positioning-outer {
+    height: 300vh;
+  }
+
+  .positioning-inner {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    padding-block: 0;
+  }
+}
+
+/*
+ * Work stack (PRD §6.5, §8.4 stack-cards). Desktop with scripting: sticky cards with an
+ * increasing top offset and a sticky index panel. Otherwise each card shows its own details.
+ */
+.work-index-column {
+  display: none;
+}
+
+@media (scripting: enabled) and (width >= 1024px) {
+  .work-index-column {
+    display: block;
+  }
+
+  .work-card-details {
+    display: none;
+  }
+
+  .work-stack-card {
+    position: sticky;
+    top: calc(12vh + var(--card-index, 0) * 28px);
+  }
+}
+
+@media (scripting: enabled) and (width >= 1024px) and (prefers-reduced-motion: reduce) {
+  .work-stack-card {
+    position: static;
+  }
+}
