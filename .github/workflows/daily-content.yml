@@ -1,0 +1,32 @@
+# Daily refresh of the DEV feed and npm stats at 05:17 UTC (PRD §9.3).
+# Production deploys stay off until Lucky sets the repository variable
+# PRODUCTION_DEPLOYS_ENABLED to "true" (CLAUDE.md: no production deploys without his go-ahead).
+name: Daily content refresh
+
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      BUILD_ID: ${{ github.sha }}-${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm content:fetch
+      - run: pnpm test
+      - run: pnpm build
+      - name: Deploy
+        if: vars.PRODUCTION_DEPLOYS_ENABLED == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: pnpm exec wrangler deploy --var BUILD_ID:${BUILD_ID}

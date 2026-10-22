@@ -21,7 +21,9 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate:local": "wrangler d1 migrations apply DB --local",
     "cf-typegen": "wrangler types",
-    "postinstall": "wrangler types"
+    "postinstall": "wrangler types",
+    "og:build": "node scripts/build-og-images.ts",
+    "screenshots": "node tools/screenshots/capture.ts"
   },
   "dependencies": {
     "@fontsource-variable/google-sans-flex": "5.3.2",

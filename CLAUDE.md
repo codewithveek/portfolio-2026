@@ -48,7 +48,11 @@ pnpm content:fetch      # DEV articles + npm stats → app/content/generated/
 pnpm images:build       # sharp exports for portrait and project media
 pnpm db:generate        # drizzle-kit generate
 pnpm db:migrate:local   # wrangler d1 migrations apply DB --local
+pnpm og:build           # OG cards into public/og/ (Playwright Chromium)
+pnpm screenshots        # design screenshots: node tools/screenshots/capture.ts <baseUrl> <outDir> [paths…]
 ```
+
+In cloud sessions, set `PLAYWRIGHT_CHROMIUM=/opt/pw-browsers/chromium` for `test:e2e`, `og:build` and `screenshots`. `test:e2e` builds and serves the production bundle on port 4173; run `cp .dev.vars.example .dev.vars` first.
 
 ## Definition of done (every PR)
 

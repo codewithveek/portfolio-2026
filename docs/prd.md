@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Owner** | Lucky Victory Success (Veek / CodewithVeek) |
-| **Status** | Ready to build |
+| **Status** | In build: M0–M4 implemented, M5 partly (see §14 for open items) |
 | **Last updated** | 2026-10-22 |
 | **Repo** | `codewithveek/portfolio-2026` |
 | **Replaces** | `codewithveek/my-portfolio` (v5, Next.js on Vercel) |
@@ -285,7 +285,7 @@ The pipeline (`tools/portrait/grade-portrait.py`, see its README) produces a tra
 
 A graded master generated from the current photo is committed at `assets-src/portrait/graded-master.png`.
 
-`scripts/build-images.ts` (sharp) then exports AVIF and WebP with alpha at 800, 1200 and 1800 px tall, plus a 24 px blurred placeholder. The hero `<img>` uses `srcset`, `fetchpriority="high"`, explicit `width`/`height`, and no lazy loading. Budget: ≤ 180 KB for the 1200 px AVIF.
+`scripts/build-images.ts` (sharp) then exports AVIF and WebP with alpha at 800, 1200 and 1800 px tall, plus a 24 px blurred placeholder. Sizes larger than the source are capped at the source height instead of upscaled (`docs/decisions/0006-portrait-export-sizes.md`). The hero `<img>` uses `srcset`, `fetchpriority="high"`, explicit `width`/`height`, and no lazy loading. Budget: ≤ 180 KB for the 1200 px AVIF.
 
 **Ask:** the source is a little small for 2× screens. If a larger original exists (≥ 1800 px tall), replace `original.png` and re-run the pipeline.
 
@@ -367,7 +367,7 @@ Each pattern is a reusable component or hook in `shared/motion/`. "Scroll-linked
 | `orbit-drift` / `orbit-rotate` | Time / scroll-linked | Hero: meridians rotate one full cycle per 24 s (CSS/`requestAnimationFrame`, paused when off-screen). Positioning: θ bound to section progress (one half-turn per word). | Static orbit |
 | `progress-line` | Scroll-linked | `scaleX` = page `scrollYProgress`, `transform-origin: left`. | Static (hidden) |
 | `dock-enter` | Triggered by hero exit | Hero observed with `IntersectionObserver`; when < 10 % visible, dock animates `y` 24 → 0 and `opacity` 0 → 1 with `springs.dock`; reverses when the hero returns. | Fade only |
-| `active-indicator` | Layout | Active dock item background is a shared `layoutId="dock-active"` element that slides between items. Active section chosen by `IntersectionObserver` with `rootMargin: "-45% 0px -45% 0px"`. | Instant swap |
+| `active-indicator` | Layout | Active dock item background is one layer whose `clip-path` slides between items (not `layoutId`, which needs Motion's larger `domMax` bundle; see `docs/decisions/0005-dock-indicator-and-motion-bundle.md`). Active section chosen by `IntersectionObserver` with `rootMargin: "-45% 0px -45% 0px"`. | Instant swap |
 | `pinned-word-swap` | Scroll-linked index | Section progress (0–1) maps to word index `floor(progress × 4)`, clamped. On index change: outgoing word `y` 0 → -40 %, `opacity` → 0, `filter: blur(8px)`; incoming from `y` 40 %, blur 8 px → 0; 0.45 s `outExpo`. Kicker types out once on first entry (mono, 18 ms per character). Ticks fill with lime as progress passes each quarter. | Static list |
 | `count-up` | Triggered | Numbers count from 0 to value over 1.2 s `outExpo`, tabular numerals, final value in the SSR HTML (the animation starts from 0 only after hydration). | Final value |
 | `fade-up` | Triggered | `y` 24 → 0, `opacity` 0 → 1, 0.45 s `outExpo`, `stagger.base` for groups. Initial hidden state applied only after hydration via a `data-motion-ready` attribute on `<html>`. | Off |
@@ -417,7 +417,7 @@ Scaffold with `npm create cloudflare@latest -- portfolio-2026 --framework=react-
 ### 9.2 Rendering and caching
 
 - **SSR for every page** (`ssr: true`). This alone fixes the v5 "empty HTML" problem.
-- **Edge cache for content pages.** Content is bundled at build time, so rendering is cheap, but cache anyway: in `workers/app.ts`, for `GET` requests to `/`, `/work/*` and `/writing`, look up `caches.default` with a cache key that includes the build ID (`BUILD_ID` var set by CI). On a miss, render, set `Cache-Control: public, max-age=0, s-maxage=86400`, and `ctx.waitUntil(cache.put(...))`. A new deploy changes the build ID, so stale pages are never served. Do not cache responses with `Set-Cookie` or non-200 status. The Cache API does nothing on `workers.dev` URLs, so verify caching on the custom domain (M6).
+- **Edge cache for content pages.** Content is bundled at build time, so rendering is cheap, but cache anyway: in `workers/app.ts`, for `GET` requests to `/`, `/work/*` and `/writing`, look up `caches.default` with a cache key that includes the build ID (`BUILD_ID` var set by CI). On a miss, render, set `Cache-Control: public, max-age=0, s-maxage=86400`, and `ctx.waitUntil(cache.put(...))`. A new deploy changes the build ID, so stale pages are never served. The key also includes a build ID baked in at build time, and cache hits get a fresh CSP nonce via `HTMLRewriter` (`docs/decisions/0001-rendering.md`). Do not cache responses with `Set-Cookie` or non-200 status. The Cache API does nothing on `workers.dev` URLs, so verify caching on the custom domain (M6).
 - **Prerendering is optional.** Cloudflare's React Router guide currently says prerendering is not supported with the Cloudflare Vite plugin; the plugin exposes only an experimental `prerenderWorker` option. Milestone M0 includes a time-boxed spike (≤ 2 hours). Adopt prerendering only if it builds and deploys cleanly; nothing in this PRD depends on it.
 
 ### 9.3 Content pipeline
@@ -450,7 +450,7 @@ Scaffold with `npm create cloudflare@latest -- portfolio-2026 --framework=react-
    ```
 
    On success, set `status = "sent"`. On error, read `error.code` (for example `E_SENDER_NOT_VERIFIED`, `E_RECIPIENT_NOT_ALLOWED`, `E_RATE_LIMIT_EXCEEDED`), store it with `status = "failed"`, log it, and still tell the visitor their message was received (it is in D1).
-6. Respond: with JS, the form shows an inline success state; without JS, redirect to `/?sent=1#contact` and render the success message server-side. Validation errors return field messages and keep the entered values.
+6. Respond: with JS, the form shows an inline success state; without JS, redirect to `/?sent=1#contact` and render the success message server-side. Validation errors return field messages and keep the entered values. Without JS the form posts to the home route's action (same handler) so errors can render on the page; Turnstile needs JS, so no-JS submissions are pointed to the email address (`docs/decisions/0002-contact-without-javascript.md`).
 
 **Setup requirements (one-time, Lucky):**
 
@@ -573,7 +573,7 @@ Code standards are in `CLAUDE.md` and apply to every file.
 
 - `meta` exports per route (title, description, canonical, Open Graph, Twitter).
 - JSON-LD `Person`: name `Lucky Victory Success`, `alternateName` `["Lucky Victory", "Veek", "CodewithVeek"]`, `jobTitle` `Software Engineer`, `url`, `sameAs` (GitHub, LinkedIn, X, DEV).
-- OG images generated at build by `scripts/build-og-images.ts` (Satori + `@resvg/resvg-js` in Node) into `public/og/{route}.png`, 1200×630, black with the lime label, display title and a small portrait crop. No runtime image generation.
+- OG images generated at build by `scripts/build-og-images.ts` (rendered with Playwright's Chromium so the variable fonts work; see `docs/decisions/0004-og-images-with-chromium.md`) into `public/og/{route}.png`, 1200×630, black with the lime label, display title and a small portrait crop. No runtime image generation.
 - `sitemap.xml` lists `/`, `/writing` and every `/work/:slug`.
 
 ### 9.9 Security headers (set in `workers/app.ts`)
@@ -764,7 +764,10 @@ Work on a feature branch per milestone; open a PR per milestone. **Production de
 9. **Résumés:** engineering and DevRel PDFs.
 10. **Higher-resolution portrait** if available.
 11. **Voice note:** record 20–30 s. Draft to rewrite in your own words: "Hi, I'm Lucky. I build backend systems for payments and tools for AI agents, and I write about both. Lately that's Zia, an inventory product for Shopify merchants, and DriftWatch, an open-source SDK for watching agents in production. I'm looking for my next role in backend, full-stack or DevRel. If that's you, the button's right below."
-12. **Media:** Zia screenshots, DriftWatch SigNoz dashboards, a Cutroom-rendered video, Nippyy architecture notes.
+12. **Media:** Zia screenshots, DriftWatch SigNoz dashboards, a Cutroom-rendered video, Nippyy architecture notes. Until then, cards show a trace cover generated from each project's `architecture` spans (`docs/decisions/0003-generated-project-covers.md`).
+13. **LinkedIn URL** for the footer and JSON-LD (`app/content/site.ts`).
+14. **Repo links** for MediWatch and KlozBuy (`app/content/experiments.ts`).
+15. **Cloudflare setup:** create the D1 database and put its id in `wrangler.jsonc`; set the real Turnstile site key and the `TURNSTILE_SECRET_KEY`, `CONTACT_INBOX`, `IP_HASH_SALT` secrets; add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` to GitHub secrets for preview uploads.
 
 ## 15. Appendix: reference analysis (bmwf3.com)
 
