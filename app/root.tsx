@@ -6,6 +6,7 @@ import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 
 import type { Route } from "./+types/root";
 import { NotFoundPage } from "./features/not-found/not-found-page";
+import { themeScript } from "./features/theme/theme-script";
 import { SmoothScrollProvider } from "./shared/motion/smooth-scroll-provider";
 import { markMotionReady } from "./shared/motion/use-reveal";
 import "./styles/app.css";
@@ -25,11 +26,13 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#08080A" />
+        {/* Applies a stored theme before first paint; allowed by hash in the CSP (workers/security-headers.ts). */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <style dangerouslySetInnerHTML={{ __html: fontFaceCss }} />
         <Meta />
         <Links />

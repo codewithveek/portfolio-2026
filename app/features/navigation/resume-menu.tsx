@@ -68,7 +68,7 @@ export function ResumeMenu({ triggerVariant, placement = "below" }: ResumeMenuPr
               onClick={() => trackEvent("resume_download", variant.id)}
             >
               {variant.label}
-              <span aria-hidden="true" className="text-accent">
+              <span aria-hidden="true" className="text-accent-text">
                 ↓
               </span>
             </a>

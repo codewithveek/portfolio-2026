@@ -3,7 +3,7 @@ import { createRequestHandler, RouterContextProvider } from "react-router";
 
 import { cspNonceContext } from "../app/shared/lib/request-context";
 import { buildCacheKey, isCacheableRequest, isCacheableResponse, replaceNonce } from "./edge-cache";
-import { applySecurityHeaders, createNonce } from "./security-headers";
+import { applySecurityHeaders, createNonce, getThemeScriptHash } from "./security-headers";
 
 const requestHandler = createRequestHandler(
   () => import("virtual:react-router/server-build"),
@@ -30,9 +30,9 @@ async function renderWithRouter(request: Request, nonce: string): Promise<Respon
   return requestHandler(request, routerContext);
 }
 
-function withHeaders(response: Response, nonce: string): Response {
+async function withHeaders(response: Response, nonce: string): Promise<Response> {
   const mutable = new Response(response.body, response);
-  applySecurityHeaders(mutable.headers, nonce);
+  applySecurityHeaders(mutable.headers, { nonce, scriptHashes: [await getThemeScriptHash()] });
   return mutable;
 }
 

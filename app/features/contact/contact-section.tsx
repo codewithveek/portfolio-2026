@@ -76,9 +76,9 @@ export function ContactSection({
                   <a
                     href={variant.href}
                     onClick={() => trackEvent("resume_download", variant.id)}
-                    className="type-label inline-flex items-center gap-2 text-text hover:text-accent"
+                    className="type-label inline-flex items-center gap-2 text-text hover:text-accent-text"
                   >
-                    <span aria-hidden="true" className="text-accent">
+                    <span aria-hidden="true" className="text-accent-text">
                       ↓
                     </span>{" "}
                     {variant.label} (PDF)

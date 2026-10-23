@@ -14,7 +14,7 @@ export function ExperimentsGrid() {
             index={experimentIndex % 3}
             className="flex flex-col gap-3 bg-bg p-6 md:p-8"
           >
-            <p className="type-label text-accent">{experiment.label}</p>
+            <p className="type-label text-accent-text">{experiment.label}</p>
             <p className="type-heading-md text-text">{experiment.name}</p>
             <p className="text-text-muted">{experiment.description}</p>
             {experiment.links.length > 0 ? (
@@ -25,7 +25,7 @@ export function ExperimentsGrid() {
                       href={link.href}
                       rel="noreferrer"
                       target="_blank"
-                      className="type-label text-text underline decoration-border underline-offset-4 hover:decoration-accent"
+                      className="type-label text-text underline decoration-border underline-offset-4 hover:decoration-accent-text"
                     >
                       {link.label} <span aria-hidden="true">↗</span>
                       <span className="sr-only"> (opens in a new tab)</span>

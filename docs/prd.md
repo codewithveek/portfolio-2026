@@ -218,7 +218,7 @@ Header, topic filter chips (All · AI & agents · Payments & fintech · Database
 
 ### 7.1 Colour tokens
 
-Dark is the default and the only theme in v1, apart from the paper sections. Keep accent coverage to about **5 % of any screen**: CTAs, labels, active nav, trace lines and at most one glow.
+Dark is the default for every visitor, whatever their system setting. A sun/moon toggle in the top bar and the dock turns on an optional light theme; the choice is stored in `localStorage` and applied before first paint. Without JavaScript the site is dark. In the light theme, lime stays a fill colour, text that was lime uses `--color-accent-deep`, and the home Writing section flips to dark to keep the contrast change (§6.8). Details: `docs/decisions/0008-light-theme.md`. Keep accent coverage to about **5 % of any screen**: CTAs, labels, active nav, trace lines and at most one glow.
 
 | Token | Value | Use | Contrast |
 |---|---|---|---|

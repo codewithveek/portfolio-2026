@@ -9,7 +9,7 @@ interface SectionKickerProps {
 export function SectionKicker({ number, text, isOnPaper = false }: SectionKickerProps) {
   return (
     <p className={`type-label ${isOnPaper ? "text-paper-text" : "text-text"}`}>
-      <span className={isOnPaper ? "text-accent-deep" : "text-accent"}>{number}</span>
+      <span className={isOnPaper ? "text-accent-deep" : "text-accent-text"}>{number}</span>
       <span aria-hidden="true"> · </span>
       <span className="sr-only"> </span>
       {text}

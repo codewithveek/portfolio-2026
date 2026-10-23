@@ -15,6 +15,11 @@
   --color-paper-text: #111113;
   --color-paper-muted: #5c5c63;
   --color-accent-deep: #4d6600;
+  /* Semantic roles that change with the theme (see the light theme below). */
+  --color-accent-text: #c6f432;
+  --color-focus: #c6f432;
+  --color-danger: #ff8a7a;
+  --color-grid-line: rgb(255 255 255 / 0.03);
 
   --font-sans: "Google Sans Flex", "Sans Fallback", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Mono Fallback", ui-monospace, monospace;
@@ -26,6 +31,37 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/*
+ * Light theme. Dark is the default whatever the system setting; light applies only when the
+ * visitor turns it on (`data-theme="light"`, set before paint by the inline theme script).
+ * Lime stays a fill colour; text that was lime uses the deep accent (PRD §7.1).
+ */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-bg: #f5f4f0;
+  --color-surface: #ffffff;
+  --color-surface-raised: #ebe9e3;
+  --color-border: #d6d3ca;
+  --color-text: #111113;
+  --color-text-muted: #55555c;
+  --color-text-faint: #8a8a91;
+  --color-accent-text: #4d6600;
+  --color-focus: #4d6600;
+  --color-danger: #b42318;
+  --color-grid-line: rgb(0 0 0 / 0.045);
+}
+
+/*
+ * The home Writing section is the "new chapter" contrast flip (PRD §6.8). In the light theme it
+ * flips the other way: its paper tokens become the dark palette.
+ */
+:root[data-theme="light"] .paper-flip {
+  --color-paper: #08080a;
+  --color-paper-text: #ededed;
+  --color-paper-muted: #a1a1a8;
+  --color-accent-deep: #c6f432;
 }
 
 @font-face {
@@ -66,7 +102,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-focus);
     outline-offset: 2px;
   }
 
@@ -161,8 +197,8 @@
 
   .grid-texture {
     background-image:
-      linear-gradient(to right, rgb(255 255 255 / 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(255 255 255 / 0.03) 1px, transparent 1px);
+      linear-gradient(to right, var(--color-grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-grid-line) 1px, transparent 1px);
     background-size: 96px 96px;
   }
 
@@ -236,6 +272,11 @@
 
   .button-primary::before {
     background: var(--color-text);
+  }
+
+  .button-primary:hover,
+  .button-primary:focus-visible {
+    color: var(--color-bg);
   }
 
   .button-outline {
@@ -342,7 +383,7 @@
 /* Orbit motif time-based rotation (PRD §8.4 "orbit-drift"); JS takes over after hydration. */
 @layer components {
   .orbit-motif {
-    color: var(--color-accent);
+    color: var(--color-accent-text);
   }
 }
 

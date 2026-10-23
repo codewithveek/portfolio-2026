@@ -15,7 +15,7 @@ export function SiteFooter() {
               href={link.href}
               rel="me noreferrer"
               target="_blank"
-              className="type-label text-text hover:text-accent"
+              className="type-label text-text hover:text-accent-text"
             >
               {link.label}
               <span className="sr-only"> (opens in a new tab)</span>

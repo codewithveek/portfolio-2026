@@ -4,7 +4,7 @@ import type { HackathonWin } from "~/content/proof";
 export function HackathonList({ wins }: { wins: readonly HackathonWin[] }) {
   return (
     <details className="group">
-      <summary className="type-label cursor-pointer list-none text-accent [&::-webkit-details-marker]:hidden">
+      <summary className="type-label cursor-pointer list-none text-accent-text [&::-webkit-details-marker]:hidden">
         See the list <span aria-hidden="true">↓</span>
       </summary>
       <ul className="mt-3 flex flex-col gap-2 text-sm text-text-muted">

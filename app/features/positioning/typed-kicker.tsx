@@ -37,7 +37,7 @@ export function TypedKicker({ id, text, isAnimated }: TypedKickerProps) {
   }, [isAnimated, text]);
 
   return (
-    <h2 ref={kickerRef} id={id} className="type-label text-accent" aria-label={text}>
+    <h2 ref={kickerRef} id={id} className="type-label text-accent-text" aria-label={text}>
       <span aria-hidden="true">{text.slice(0, visibleLength)}</span>
       <span aria-hidden="true" className="invisible">
         {text.slice(visibleLength)}

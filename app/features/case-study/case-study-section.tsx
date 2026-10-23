@@ -16,7 +16,8 @@ export function CaseStudySection({ id, number, title, children }: CaseStudySecti
     >
       <div className="lg:col-span-3">
         <h2 id={id} className="type-label lg:sticky lg:top-24">
-          <span className="text-accent">{number}</span> <span aria-hidden="true">·</span> {title}
+          <span className="text-accent-text">{number}</span> <span aria-hidden="true">·</span>{" "}
+          {title}
         </h2>
       </div>
       <div className="lg:col-span-9">{children}</div>

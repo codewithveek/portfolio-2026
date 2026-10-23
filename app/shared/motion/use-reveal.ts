@@ -7,7 +7,10 @@ function getSharedObserver(): IntersectionObserver {
     sharedObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
+          // Also reveal elements a jump (End key, anchor link) skipped past, so nothing above
+          // the viewport is left hidden.
+          const isScrolledPast = entry.boundingClientRect.bottom < 0;
+          if (entry.isIntersecting || isScrolledPast) {
             entry.target.setAttribute("data-in-view", "");
             sharedObserver?.unobserve(entry.target);
           }

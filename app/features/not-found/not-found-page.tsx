@@ -23,7 +23,7 @@ export function NotFoundPage({
         className="pointer-events-none absolute top-1/2 right-[-20%] -z-10 size-[90vmin] -translate-y-1/2 opacity-25"
       />
       <div className="layout-container">
-        <p className="type-label text-accent">404 · {site.wordmark}</p>
+        <p className="type-label text-accent-text">404 · {site.wordmark}</p>
         <h1 className="type-display-xl mt-6 text-text">{title}</h1>
         <p className="type-body-lg mt-6 max-w-[32rem] text-text-muted">{message}</p>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">

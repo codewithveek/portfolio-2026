@@ -3,6 +3,8 @@ import { m } from "motion/react";
 import { springs } from "~/shared/motion/motion-tokens";
 import { useMotionPreference } from "~/shared/motion/use-motion-preference";
 
+import { ThemeToggle } from "~/features/theme/theme-toggle";
+
 import { DockActiveIndicator } from "./dock-active-indicator";
 import { ResumeMenu } from "./resume-menu";
 import { dockItems, type SectionId } from "./section-ids";
@@ -49,6 +51,7 @@ export function DockNav({ hasHero = false }: { hasHero?: boolean }) {
       <div className="max-md:hidden">
         <ResumeMenu triggerVariant="icon" placement="above" />
       </div>
+      <ThemeToggle />
     </div>
   );
 

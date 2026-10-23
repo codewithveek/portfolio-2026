@@ -29,7 +29,7 @@ export function PaperSection({ id, labelledBy, children }: PaperSectionProps) {
       ref={sectionRef}
       id={id}
       aria-labelledby={labelledBy}
-      className="paper bg-paper text-paper-text"
+      className="paper paper-flip bg-paper text-paper-text"
       style={allowsRichMotion ? { clipPath } : undefined}
     >
       {children}

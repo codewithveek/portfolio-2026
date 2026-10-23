@@ -24,7 +24,7 @@ export function ProjectDetails({
     : undefined;
   return (
     <div className="flex flex-col gap-5">
-      <p className="type-label text-accent">{formatProjectIndex(project.order, total)}</p>
+      <p className="type-label text-accent-text">{formatProjectIndex(project.order, total)}</p>
       <Heading
         className="type-heading-md text-[clamp(1.75rem,2.6vw,2.5rem)] text-text"
         style={titleStyle}
@@ -37,12 +37,12 @@ export function ProjectDetails({
         to={`/work/${project.slug}`}
         viewTransition
         aria-label={`Read case study: ${project.title}`}
-        className="type-label group inline-flex w-fit items-center gap-2 border-b border-accent pb-1 text-text"
+        className="type-label group inline-flex w-fit items-center gap-2 border-b border-accent-text pb-1 text-text"
       >
         Read case study
         <span
           aria-hidden="true"
-          className="text-accent transition-transform group-hover:translate-x-1"
+          className="text-accent-text transition-transform group-hover:translate-x-1"
         >
           →
         </span>

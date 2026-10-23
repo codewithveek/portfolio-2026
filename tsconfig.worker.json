@@ -4,6 +4,7 @@
     ".react-router/types/+server-build.d.ts",
     "workers/**/*",
     "app/shared/lib/request-context.ts",
+    "app/features/theme/theme-script.ts",
     "worker-configuration.d.ts"
   ],
   "compilerOptions": {

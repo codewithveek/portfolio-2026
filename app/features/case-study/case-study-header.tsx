@@ -38,7 +38,7 @@ export function CaseStudyHeader({ project }: { project: ProjectFrontmatter }) {
       >
         <span aria-hidden="true">←</span> All work
       </Link>
-      <p className="type-label mt-16 text-accent">
+      <p className="type-label mt-16 text-accent-text">
         Case study · {String(project.order).padStart(2, "0")}
       </p>
       <h1
@@ -77,7 +77,7 @@ export function CaseStudyHeader({ project }: { project: ProjectFrontmatter }) {
         </ul>
       ) : null}
       {project.confidentiality && placeholderSafe(project.confidentiality) ? (
-        <p className="type-label mt-8 max-w-[48rem] border-l-2 border-accent pl-4 text-text-muted normal-case tracking-normal">
+        <p className="type-label mt-8 max-w-[48rem] border-l-2 border-accent-text pl-4 text-text-muted normal-case tracking-normal">
           {project.confidentiality}
         </p>
       ) : null}

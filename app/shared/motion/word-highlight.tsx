@@ -44,7 +44,7 @@ export function WordHighlight({ statement, className }: WordHighlightProps) {
         const sliceStart = wordIndex / words.length;
         const sliceEnd = (wordIndex + 1) / words.length;
         const key = `${word.text}-${wordIndex}`;
-        const colorClass = word.isKeyword ? "text-accent" : "text-text";
+        const colorClass = word.isKeyword ? "text-accent-text" : "text-text";
         if (!allowsRichMotion) {
           return (
             <span key={key} className={colorClass}>
@@ -75,7 +75,7 @@ function HighlightedWord({ word, progress, slice }: HighlightedWordProps) {
   const opacity = useTransform(progress, slice, [0.25, 1]);
   return (
     <>
-      <m.span style={{ opacity }} className={word.isKeyword ? "text-accent" : "text-text"}>
+      <m.span style={{ opacity }} className={word.isKeyword ? "text-accent-text" : "text-text"}>
         {word.text}
       </m.span>{" "}
     </>

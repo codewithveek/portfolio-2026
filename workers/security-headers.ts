@@ -1,8 +1,26 @@
+import { themeScript } from "../app/features/theme/theme-script";
+
+let themeScriptHashPromise: Promise<string> | null = null;
+
+/** CSP source for the static pre-paint theme script, computed once per isolate. */
+export function getThemeScriptHash(): Promise<string> {
+  themeScriptHashPromise ??= crypto.subtle
+    .digest("SHA-256", new TextEncoder().encode(themeScript))
+    .then((digest) => `'sha256-${btoa(String.fromCharCode(...new Uint8Array(digest)))}'`);
+  return themeScriptHashPromise;
+}
+
+interface SecurityHeaderOptions {
+  nonce: string;
+  /** Extra script-src sources, e.g. the theme script's hash. */
+  scriptHashes: readonly string[];
+}
+
 /** Security headers (PRD §9.9). */
-export function buildContentSecurityPolicy(nonce: string): string {
+export function buildContentSecurityPolicy({ nonce, scriptHashes }: SecurityHeaderOptions): string {
   return [
     "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}' https://challenges.cloudflare.com https://static.cloudflareinsights.com`,
+    `script-src 'self' 'nonce-${nonce}' ${scriptHashes.join(" ")} https://challenges.cloudflare.com https://static.cloudflareinsights.com`,
     "frame-src https://challenges.cloudflare.com",
     "img-src 'self' data:",
     "media-src 'self'",
@@ -15,8 +33,8 @@ export function buildContentSecurityPolicy(nonce: string): string {
   ].join("; ");
 }
 
-export function applySecurityHeaders(headers: Headers, nonce: string): void {
-  headers.set("Content-Security-Policy", buildContentSecurityPolicy(nonce));
+export function applySecurityHeaders(headers: Headers, options: SecurityHeaderOptions): void {
+  headers.set("Content-Security-Policy", buildContentSecurityPolicy(options));
   headers.set("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
   headers.set("X-Content-Type-Options", "nosniff");
   headers.set("Referrer-Policy", "strict-origin-when-cross-origin");

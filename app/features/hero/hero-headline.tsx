@@ -6,7 +6,7 @@ export function HeroHeadline() {
   const [firstName = "", lastName = ""] = site.name.toUpperCase().split(" ");
   return (
     <div>
-      <p className="hero-intro-fade type-label flex items-center gap-2 text-accent">
+      <p className="hero-intro-fade type-label flex items-center gap-2 text-accent-text">
         <span className="size-2 rounded-full bg-accent" aria-hidden="true" />
         {site.heroLabel}
       </p>

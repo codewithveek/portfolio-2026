@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 
 import { site } from "~/content/site";
+import { ThemeToggle } from "~/features/theme/theme-toggle";
 
 import { SectionLink } from "./section-link";
 
@@ -15,12 +16,15 @@ export function TopBar() {
       >
         {site.wordmark}
       </Link>
-      <SectionLink sectionId="contact" className="button button-outline" trackingId="hire_me_top">
-        <span>Hire me</span>
-        <span className="button-arrow" aria-hidden="true">
-          →
-        </span>
-      </SectionLink>
+      <div className="flex items-center gap-2">
+        <ThemeToggle />
+        <SectionLink sectionId="contact" className="button button-outline" trackingId="hire_me_top">
+          <span>Hire me</span>
+          <span className="button-arrow" aria-hidden="true">
+            →
+          </span>
+        </SectionLink>
+      </div>
     </header>
   );
 }

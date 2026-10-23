@@ -6,7 +6,7 @@ import type { ExperienceEntry } from "./schemas";
  */
 export const experience: readonly ExperienceEntry[] = [
   { role: "Founder & engineer", organisation: "Zia", years: "2026–present" },
-  { role: "[Lucky] role", organisation: "Afriex", years: "[Lucky] years" },
+  { role: "[Lucky] role", organisation: "Afriex", years: "Apr–Oct 2026" },
   {
     role: "Backend engineer [Lucky] confirm title",
     organisation: "Nippyy",

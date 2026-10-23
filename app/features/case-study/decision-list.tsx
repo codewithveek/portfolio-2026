@@ -15,7 +15,7 @@ export function DecisionList({ decisions }: { decisions: readonly ProjectDecisio
           index={decisionIndex % 2}
           className="rounded-card border border-border bg-surface p-6 md:p-8"
         >
-          <p className="type-label text-accent">
+          <p className="type-label text-accent-text">
             Decision {String(decisionIndex + 1).padStart(2, "0")}
           </p>
           <p className="type-body-lg mt-4 text-text">

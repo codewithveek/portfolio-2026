@@ -60,8 +60,8 @@ export function ContactForm({
 
   if (isSentViaRedirect || result?.status === "success") {
     return (
-      <div role="status" className="rounded-card border border-accent/40 bg-surface p-8">
-        <p className="type-label text-accent">Message received</p>
+      <div role="status" className="rounded-card border border-accent-text/40 bg-surface p-8">
+        <p className="type-label text-accent-text">Message received</p>
         <p className="type-body-lg mt-3 text-text">
           Thanks — I'll reply from {site.email}, usually within two working days.
         </p>
@@ -128,7 +128,7 @@ export function ContactForm({
       <input ref={startedAtRef} type="hidden" name="startedAt" defaultValue={renderedAt} />
       <div ref={turnstileRef} className="min-h-[65px]" />
       {result?.status === "rejected" || hasLoadError ? (
-        <p id="contact-form-error" role="alert" className="text-sm text-[#ff8a7a]">
+        <p id="contact-form-error" role="alert" className="text-sm text-danger">
           {result?.status === "rejected"
             ? rejectionMessages[result.reason]
             : rejectionMessages.turnstile}

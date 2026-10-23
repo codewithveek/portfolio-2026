@@ -29,7 +29,7 @@ export function QuoteCard({ testimonial, index }: { testimonial: Testimonial; in
         <span
           aria-hidden="true"
           className={`type-label flex size-12 shrink-0 items-center justify-center rounded-full ${
-            isFeatured ? "bg-accent-ink text-accent" : "bg-surface-raised text-accent"
+            isFeatured ? "bg-accent-ink text-accent" : "bg-surface-raised text-accent-text"
           }`}
         >
           {toInitials(testimonial.name)}

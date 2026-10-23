@@ -36,7 +36,7 @@ export function FormField({
     "aria-invalid": error ? true : undefined,
     "aria-describedby": error ? errorId : undefined,
     className:
-      "w-full rounded-control border border-border bg-surface px-4 py-3 text-text placeholder:text-text-faint focus:border-accent focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent aria-[invalid=true]:border-[#ff8a7a]",
+      "w-full rounded-control border border-border bg-surface px-4 py-3 text-text placeholder:text-text-faint focus:border-accent-text focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus aria-[invalid=true]:border-danger",
   };
   return (
     <div className="flex flex-col gap-2">
@@ -50,7 +50,7 @@ export function FormField({
         <input {...sharedProps} type={type} autoComplete={autoComplete} />
       )}
       {error ? (
-        <p id={errorId} className="text-sm text-[#ff8a7a]">
+        <p id={errorId} className="text-sm text-danger">
           {error}
         </p>
       ) : null}

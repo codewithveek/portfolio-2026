@@ -45,7 +45,7 @@ export function ResultsList({ project, packageDownloads }: ResultsListProps) {
         <ul className="mt-4 flex flex-col border-t border-border">
           {project.shipped.map((item) => (
             <li key={item} className="flex gap-4 border-b border-border py-4 text-text">
-              <span aria-hidden="true" className="text-accent">
+              <span aria-hidden="true" className="text-accent-text">
                 ✓
               </span>
               {item}
