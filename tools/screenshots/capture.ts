@@ -1,6 +1,6 @@
 /**
  * Captures design screenshots for review: `node tools/screenshots/capture.ts <baseUrl> <outDir> [paths...]`.
- * Set COLOR_SCHEME=light for the light theme. Desktop 1440×900 and mobile 390×844: first viewport, then one viewport per section.
+ * Set THEME=light to capture the optional light theme. Desktop 1440×900 and mobile 390×844: first viewport, then one viewport per section.
  */
 import { chromium } from "@playwright/test";
 
@@ -21,8 +21,10 @@ for (const viewport of viewports) {
     viewport: { width: viewport.width, height: viewport.height },
     deviceScaleFactor: 1,
     reducedMotion: process.env.REDUCED_MOTION === "1" ? "reduce" : "no-preference",
-    colorScheme: process.env.COLOR_SCHEME === "light" ? "light" : "dark",
   });
+  if (process.env.THEME === "light") {
+    await context.addInitScript(() => localStorage.setItem("veek-theme", "light"));
+  }
   const page = await context.newPage();
   page.on("console", (message) => {
     if (message.type() === "error") console.error(`[${viewport.name}] ${message.text()}`);
