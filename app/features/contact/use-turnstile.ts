@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
 
+import { useTheme } from "~/features/theme/theme-preference";
+
+import { contactTurnstileAction } from "./turnstile-action";
+
 interface TurnstileApi {
   render(
     container: HTMLElement,
@@ -36,6 +40,8 @@ function loadTurnstileScript(): Promise<void> {
  */
 export function useTurnstile(containerRef: RefObject<HTMLElement | null>, siteKey: string) {
   const widgetIdRef = useRef<string | null>(null);
+  // The widget's colours follow the site theme chosen when it renders.
+  const theme = useTheme();
   const [hasLoadError, setHasLoadError] = useState(false);
 
   useEffect(() => {
@@ -51,8 +57,8 @@ export function useTurnstile(containerRef: RefObject<HTMLElement | null>, siteKe
             if (isCancelled || !window.turnstile || widgetIdRef.current) return;
             widgetIdRef.current = window.turnstile.render(container, {
               sitekey: siteKey,
-              theme: "dark",
-              action: "contact",
+              theme,
+              action: contactTurnstileAction,
             });
           })
           .catch(() => setHasLoadError(true));
@@ -66,7 +72,7 @@ export function useTurnstile(containerRef: RefObject<HTMLElement | null>, siteKe
       if (widgetIdRef.current) window.turnstile?.remove(widgetIdRef.current);
       widgetIdRef.current = null;
     };
-  }, [containerRef, siteKey]);
+  }, [containerRef, siteKey, theme]);
 
   const resetTurnstile = useCallback(() => {
     if (widgetIdRef.current) window.turnstile?.reset(widgetIdRef.current);

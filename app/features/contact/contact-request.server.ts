@@ -3,6 +3,7 @@ import { env } from "cloudflare:workers";
 import { readFormValues, type ContactResult } from "./contact-schema";
 import { createD1ContactStore } from "./contact-store.server";
 import { handleContactSubmission } from "./handle-contact-submission.server";
+import { parseHostnames } from "./verify-turnstile.server";
 
 /**
  * The form only accepts messages when it can keep them: a D1 binding and an inbox secret.
@@ -33,6 +34,7 @@ export async function processContactRequest(request: Request): Promise<ContactRe
       emailBinding: env.EMAIL,
       rateLimiter: env.CONTACT_RATE_LIMITER,
       turnstileSecret: env.TURNSTILE_SECRET_KEY,
+      turnstileHostnames: parseHostnames(env.TURNSTILE_HOSTNAMES),
       contactInbox: env.CONTACT_INBOX,
       ipHashSalt: env.IP_HASH_SALT,
     },

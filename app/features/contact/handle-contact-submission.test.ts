@@ -25,7 +25,9 @@ function buildForm(overrides: Record<string, string> = {}): FormData {
 }
 
 function turnstileFetcher(isSuccess: boolean): typeof fetch {
-  return vi.fn(async () => Response.json({ success: isSuccess })) as unknown as typeof fetch;
+  return vi.fn(async () =>
+    Response.json({ success: isSuccess, action: "contact", hostname: "veek.me" }),
+  ) as unknown as typeof fetch;
 }
 
 describe("handleContactSubmission", () => {
@@ -51,6 +53,7 @@ describe("handleContactSubmission", () => {
       emailBinding: { send } as unknown as SendEmail,
       rateLimiter: { limit } as unknown as RateLimit,
       turnstileSecret: "secret",
+      turnstileHostnames: new Set(["veek.me"]),
       contactInbox: "inbox@example.com",
       ipHashSalt: "salt",
       fetcher: turnstileFetcher(true),

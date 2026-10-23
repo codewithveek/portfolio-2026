@@ -433,7 +433,7 @@ Scaffold with `npm create cloudflare@latest -- portfolio-2026 --framework=react-
 **Flow (`POST /api/contact`, resource route action):**
 
 1. Parse `FormData`. Validate with `contactSubmissionSchema` (Zod): `name` 2–80 chars, `email` valid, `company` optional ≤ 120, `message` 20–4000, honeypot field `website` must be empty, `startedAt` timestamp must be ≥ 3 s old.
-2. Verify Turnstile: `POST https://challenges.cloudflare.com/turnstile/v0/siteverify` with `secret`, `response` and `remoteip` (`CF-Connecting-IP`). Reject on failure.
+2. Verify Turnstile: `POST https://challenges.cloudflare.com/turnstile/v0/siteverify` (form-encoded, 10 s timeout) with `secret`, `response` and `remoteip` (`CF-Connecting-IP`). Reject unless `success` is true, `action` is `contact`, and `hostname` is in the `TURNSTILE_HOSTNAMES` var (comma-separated; production never lists localhost). Tokens over 2048 characters are rejected without a call. Site key `0x4AAAAAAFisNj5DU2mpX_9j`; local development and e2e use Cloudflare's test keys from `.dev.vars`.
 3. Rate limit: `env.CONTACT_RATE_LIMITER.limit({ key: "contact:" + clientIp })`. Limits are per Cloudflare location and approximate (eventually consistent), so treat this as a backstop; Turnstile is the primary defence. Cloudflare advises against IP keys in general; for an anonymous form the IP is the only reasonable key, so accept that trade-off and keep the limit generous (3 per 60 s).
 4. Insert into D1 (`contact_messages`: `id` ULID, `name`, `email`, `company`, `message`, `ip_hash` (SHA-256 with a secret salt, never the raw IP), `user_agent` (≤ 512 chars), `status` `received|sent|failed`, `error_code`, `created_at`).
 5. Send the notification with the `send_email` binding:

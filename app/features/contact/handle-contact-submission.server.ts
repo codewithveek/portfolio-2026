@@ -11,6 +11,7 @@ import {
 } from "./contact-schema";
 import type { ContactStore } from "./contact-store.server";
 import { sendContactEmail } from "./send-contact-email.server";
+import { contactTurnstileAction } from "./turnstile-action";
 import { verifyTurnstile } from "./verify-turnstile.server";
 
 export interface ContactDependencies {
@@ -18,6 +19,8 @@ export interface ContactDependencies {
   emailBinding: SendEmail;
   rateLimiter: RateLimit;
   turnstileSecret: string;
+  /** Frontend hostnames this deployment serves (TURNSTILE_HOSTNAMES). */
+  turnstileHostnames: ReadonlySet<string>;
   contactInbox: string;
   ipHashSalt: string;
   fetcher?: typeof fetch;
@@ -76,6 +79,8 @@ export async function handleContactSubmission({
     token: submission.turnstileToken,
     secret: dependencies.turnstileSecret,
     remoteIp: clientIp,
+    expectedAction: contactTurnstileAction,
+    expectedHostnames: dependencies.turnstileHostnames,
     fetcher: dependencies.fetcher,
   });
   if (!isHuman) return { status: "rejected", reason: "turnstile", values };

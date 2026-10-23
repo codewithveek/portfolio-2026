@@ -40,8 +40,10 @@
     },
   ],
   "vars": {
-    // Turnstile's always-pass test site key; replace with the real public key before launch.
-    "TURNSTILE_SITE_KEY": "1x00000000000000000000AA",
+    // Public Turnstile site key for the contact widget (action "contact").
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAFisNj5DU2mpX_9j",
+    // Frontend hostnames siteverify must report for this deployment. Never localhost here.
+    "TURNSTILE_HOSTNAMES": "veek-portfolio.codewithveek.workers.dev,veek.me",
     "BUILD_ID": "dev",
   },
 }
