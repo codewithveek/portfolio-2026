@@ -40,7 +40,7 @@ export type ContactResult =
   | { status: "invalid"; fieldErrors: ContactFieldErrors; values: ContactFieldValues }
   | {
       status: "rejected";
-      reason: "spam" | "turnstile" | "rate-limited";
+      reason: "spam" | "turnstile" | "rate-limited" | "unavailable";
       values: ContactFieldValues;
     };
 

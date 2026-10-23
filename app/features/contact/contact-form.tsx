@@ -21,6 +21,7 @@ const rejectionMessages = {
   spam: "That didn't look like a person typing. Please try again in a few seconds.",
   turnstile: `We couldn't verify the anti-spam check. It needs JavaScript; you can also email ${site.email}.`,
   "rate-limited": "Too many messages from this connection. Please wait a minute and try again.",
+  unavailable: `The form isn't accepting messages right now. Please email ${site.email} instead.`,
 } as const;
 
 /**
