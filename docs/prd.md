@@ -767,7 +767,7 @@ Work on a feature branch per milestone; open a PR per milestone. **Production de
 12. **Media:** Zia screenshots, DriftWatch SigNoz dashboards, a Cutroom-rendered video, Nippyy architecture notes. Until then, cards show a trace cover generated from each project's `architecture` spans (`docs/decisions/0003-generated-project-covers.md`).
 13. **LinkedIn URL** for the footer and JSON-LD (`app/content/site.ts`).
 14. **Repo links** for MediWatch and KlozBuy (`app/content/experiments.ts`).
-15. **Cloudflare setup:** create the D1 database and put its id in `wrangler.jsonc`; set the real Turnstile site key and the `TURNSTILE_SECRET_KEY`, `CONTACT_INBOX`, `IP_HASH_SALT` secrets; add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` to GitHub secrets for preview uploads.
+15. **Cloudflare setup:** D1 created and migrated (2026-10-23), first deploy live at `https://veek-portfolio.codewithveek.workers.dev`. Still to do: set the real Turnstile site key and the `TURNSTILE_SECRET_KEY`, `CONTACT_INBOX`, `IP_HASH_SALT` secrets; add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` to GitHub secrets for preview uploads.
 
 ## 15. Appendix: reference analysis (bmwf3.com)
 

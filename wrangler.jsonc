@@ -29,8 +29,7 @@
     {
       "binding": "DB",
       "database_name": "veek-portfolio",
-      // Replace with the id printed by `wrangler d1 create veek-portfolio` before the first deploy.
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "42df817c-1694-4137-b584-0a9648475d49",
       "migrations_dir": "drizzle",
     },
   ],
