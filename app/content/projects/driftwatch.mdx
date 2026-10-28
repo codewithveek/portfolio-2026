@@ -25,7 +25,7 @@ architecture:
   - { label: "agent (vercel ai sdk)", detail: "Your agent, your providers", depth: 0, start: 0, width: 1 }
   - { label: "@driftwatch/sdk", detail: "Every tool call and model step as an OpenTelemetry span", depth: 1, start: 0, width: 0.7 }
   - { label: "otel export", detail: "SigNoz or any OTLP backend", depth: 1, start: 0.72, width: 0.28 }
-  - { label: "drift watcher", detail: "Prometheus metrics: tool-call mix, error rate, latency, token spend", depth: 2, start: 0.08, width: 0.44 }
+  - { label: "drift judge", detail: "Prometheus window deltas (tool mix, errors, p95 latency, tokens), judged by a model", depth: 2, start: 0.08, width: 0.44 }
   - { label: "@driftwatch/autopilot", detail: "Notify, pause, roll back or throttle", depth: 3, start: 0.2, width: 0.42 }
   - { label: "human approval", detail: "Required for destructive actions", depth: 4, start: 0.36, width: 0.26 }
   - { label: "server + console", detail: "@driftwatch/server, @driftwatch/console", depth: 2, start: 0.56, width: 0.44 }
@@ -52,6 +52,6 @@ next:
 
 DriftWatch wraps an agent built on the **Vercel AI SDK**. Every tool call and model step becomes an **OpenTelemetry** span, so the agent's behaviour shows up in SigNoz or any OTLP backend next to the rest of the system.
 
-A **drift watcher** reads Prometheus metrics built from that telemetry and looks for behavioural drift: changes in the tool-call mix, error rate, latency and token spend.
+The **drift detector** queries a Prometheus-compatible backend for two time windows and computes the change in tool-call mix, error rate, p95 latency and token spend. A model (any AI SDK model you pass in) then judges whether that change is drift and returns a schema-typed verdict with a severity, reasons and a recommended action.
 
 When drift crosses a policy, **`@driftwatch/autopilot`** responds. It can notify, pause, roll back or throttle, and destructive actions wait for a human to approve them. `@driftwatch/server` and `@driftwatch/console` give the team a place to see and act on it.

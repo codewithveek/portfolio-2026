@@ -609,7 +609,7 @@ Never invent numbers. Every metric shown on the site needs a `source` (§10.5). 
 
 **03 · DriftWatch** (`/work/driftwatch`)
 - Tagline: A self-observing AI agent SDK.
-- What it does: traces every tool call and model step as OpenTelemetry; drift is detected from Prometheus metrics built from that telemetry (tool-call mix, error rate, latency, token spend); a policy-driven autopilot notifies, pauses, rolls back or throttles, with human approval for destructive actions.
+- What it does: traces every tool call and model step as OpenTelemetry; a drift detector queries Prometheus-compatible metrics for two windows, computes deltas, and a model judges drift with a schema-typed verdict (verified in `packages/sdk/src/drift/detector.ts`, 2026-10-28) (tool-call mix, error rate, latency, token spend); a policy-driven autopilot notifies, pauses, rolls back or throttles, with human approval for destructive actions.
 - Facts: MIT, pnpm monorepo (Node ≥ 22), packages `@driftwatch/sdk`, `@driftwatch/autopilot`, `@driftwatch/server`, `@driftwatch/console`; layers over the Vercel AI SDK, brings no provider SDKs, reads no env vars itself. Docs: `drift-watch-docs.vercel.app`. Articles: "Detecting AI Agent Behavioral Drift with OpenTelemetry and SigNoz", "AI Agent observability with DriftWatch and SigNoz".
 - Media: SigNoz dashboards and a trace flame graph (Lucky has these).
 - **Before launch:** consolidate `drift-watch` (canonical, few commits) and `drift-watch-legacy` (history) so reviewers do not find two repos with identical READMEs. **[Lucky]**
@@ -623,7 +623,7 @@ Never invent numbers. Every metric shown on the site needs a `source` (§10.5). 
 
 **05 · Nippyy backend** (`/work/nippyy-backend`)
 - Tagline: Backend foundations for a cross-border fintech product.
-- What to show (Fastify + TypeScript): an access-control module combining RBAC, ABAC and maker-checker approvals across nine fintech roles; NIBSS-compliant session ID and transaction reference utilities validated against real transaction samples (including spec discrepancies found); an OCR and field-extraction pipeline (Google Cloud Vision + Claude tool use, BullMQ, hybrid pipeline); correlation IDs for distributed tracing; integrations with Afriex and 9PSB.
+- What to show (Fastify + TypeScript): an access-control module combining RBAC, ABAC and maker-checker approvals across nine fintech roles; NIBSS-compliant session ID and transaction reference utilities validated against real transaction samples (including spec discrepancies found); correlation IDs for distributed tracing; integrations with Afriex and 9PSB.
 - Private repo: diagrams and short sanitised code excerpts only. **[Lucky]** confirm what can be shown publicly.
 
 ### 10.2 Project frontmatter schema
@@ -668,11 +668,11 @@ Do not show reaction or comment counts.
 
 | Name | One line | Link |
 |---|---|---|
-| pii-mask | Zero-dependency TypeScript PII masking: 31 detectors (including NIN and BVN), six modes including reversible tokenization, React bindings; four npm packages, 9,000+ combined downloads. | repo, npm |
+| pii-mask | Zero-dependency TypeScript PII masking: 31 detectors (including NIN and BVN), six modes including reversible tokenization, React bindings; four npm packages; the card shows their combined downloads since first publish, fetched from npm by `pnpm content:fetch`. | repo, npm |
 | Vetit | Reviews an MCP server, probes how its tools behave, and writes a least-privilege grant a human approves (Agent Harness Hackathon, Aug 2026). | repo |
 | hymem | Bitemporal, multi-tenant memory for AI agents with pluggable storage (`@hymem/core`). | repo, npm |
 | FluxMedia | One TypeScript upload API across Cloudinary, S3 and R2 (`@fluxmedia/core`). | fluxmedia.dev |
-| MediWatch | Vision-agent pipeline (YOLO + Moondream + Gemini) on Stream's Vision Agents SDK, built for a hackathon. | repo |
+| MediWatch | Vision-agent pipeline (YOLO + Moondream + Gemini) on Stream's Vision Agents SDK, built for a hackathon. | github.com/codewithveek/medi-watch |
 | Claude skills | Public skills including product videos and database schema engineering. | `codewithveek/skills` |
 
 ### 10.5 Proof and metrics rules
@@ -767,7 +767,7 @@ Work on a feature branch per milestone; open a PR per milestone. **Production de
 11. **Voice note:** record 20–30 s. Draft to rewrite in your own words: "Hi, I'm Lucky. I build backend systems for payments and tools for AI agents, and I write about both. Lately that's Zia, an inventory product for Shopify merchants, and DriftWatch, an open-source SDK for watching agents in production. I'm looking for my next role in backend, full-stack or DevRel. If that's you, the button's right below."
 12. **Media:** Zia screenshots, DriftWatch SigNoz dashboards, a Cutroom-rendered video, Nippyy architecture notes. Until then, cards show a trace cover generated from each project's `architecture` spans (`docs/decisions/0003-generated-project-covers.md`).
 13. ~~LinkedIn URL~~ Added: linkedin.com/in/lucky-victory-success.
-14. **Repo link** for MediWatch (`app/content/experiments.ts`). KlozBuy was removed.
+14. ~~Repo link for MediWatch~~ Added. KlozBuy was removed.
 15. **Cloudflare setup:** D1 created and migrated, Turnstile widget `0x4AAAAAAFisNj5DU2mpX_9j` wired with its secret stored as `TURNSTILE_SECRET_KEY` on the `veek-portfolio` Worker (2026-10-23), live at `https://veek-portfolio.codewithveek.workers.dev`. Still to do: set the `CONTACT_INBOX` secret (a verified Email Routing destination), onboard `veek.me` as an Email Service sending domain, and add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` to GitHub secrets for preview uploads.
 
 ## 15. Appendix: reference analysis (bmwf3.com)

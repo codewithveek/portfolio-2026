@@ -3,13 +3,18 @@ import { useState } from "react";
 import { useMotionPreference } from "~/shared/motion/use-motion-preference";
 import { SectionKicker } from "~/shared/ui/section-kicker";
 
-import { ExperimentsGrid } from "./experiments-grid";
+import { ExperimentsGrid, type DownloadTotal } from "./experiments-grid";
 import { ProjectIndexPanel } from "./project-index-panel";
 import { ProjectStack } from "./project-stack";
 import type { ProjectSummary } from "./project-summary";
 
 /** Selected work (PRD §6.5): sticky index on the left, stacking media cards on the right. */
-export function WorkSection({ projects }: { projects: readonly ProjectSummary[] }) {
+interface WorkSectionProps {
+  projects: readonly ProjectSummary[];
+  downloadTotals: Readonly<Record<string, DownloadTotal>>;
+}
+
+export function WorkSection({ projects, downloadTotals }: WorkSectionProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const { allowsRichMotion } = useMotionPreference();
 
@@ -31,7 +36,7 @@ export function WorkSection({ projects }: { projects: readonly ProjectSummary[] 
           <ProjectStack projects={projects} onActiveIndexChange={setActiveIndex} />
         </div>
       </div>
-      <ExperimentsGrid />
+      <ExperimentsGrid downloadTotals={downloadTotals} />
     </section>
   );
 }

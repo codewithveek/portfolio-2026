@@ -11,6 +11,7 @@ export const experiments: readonly Experiment[] = [
       { label: "Repo", href: "https://github.com/codewithveek/pii-mask" },
       { label: "npm", href: "https://www.npmjs.com/package/@pii-mask/core" },
     ],
+    downloadTotalId: "pii-mask",
   },
   {
     name: "Vetit",
@@ -43,8 +44,7 @@ export const experiments: readonly Experiment[] = [
     name: "MediWatch",
     label: "Hackathon",
     description: "Vision-agent pipeline (YOLO + Moondream + Gemini) on Stream's Vision Agents SDK.",
-    // Repo link pending (PRD §14): add it here once confirmed.
-    links: [],
+    links: [{ label: "Repo", href: "https://github.com/codewithveek/medi-watch" }],
   },
   {
     name: "Claude skills",

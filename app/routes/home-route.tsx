@@ -1,7 +1,7 @@
 import { env } from "cloudflare:workers";
 import { redirect } from "react-router";
 
-import { devArticles, getFeaturedArticles } from "~/content/articles";
+import { devArticles, getFeaturedArticles, packageStats } from "~/content/articles";
 import { getProjects } from "~/content/projects.server";
 import { site } from "~/content/site";
 import { AboutSection } from "~/features/about/about-section";
@@ -35,6 +35,12 @@ export function loader({ request }: Route.LoaderArgs) {
     projects: getProjects().map(toProjectSummary),
     featuredArticles: getFeaturedArticles(),
     articleCount: devArticles.articles.length,
+    downloadTotals: Object.fromEntries(
+      packageStats.totals.map((total) => [
+        total.id,
+        { downloads: total.downloads, period: total.period },
+      ]),
+    ),
     articlesFetchedOn: devArticles.fetchedAt.slice(0, 10),
     turnstileSiteKey: env.TURNSTILE_SITE_KEY,
     isSentViaRedirect: url.searchParams.get("sent") === "1",
@@ -60,7 +66,7 @@ export default function HomeRoute({ loaderData, actionData }: Route.ComponentPro
           articleCount={loaderData.articleCount}
           articlesFetchedOn={loaderData.articlesFetchedOn}
         />
-        <WorkSection projects={loaderData.projects} />
+        <WorkSection projects={loaderData.projects} downloadTotals={loaderData.downloadTotals} />
         <AboutSection />
         <TestimonialsSection />
         <WritingSection articles={loaderData.featuredArticles} />

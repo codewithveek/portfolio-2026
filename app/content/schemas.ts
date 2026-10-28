@@ -74,6 +74,8 @@ export const experimentSchema = z.object({
   label: z.string().min(1),
   description: z.string().min(1),
   links: z.array(z.object({ label: z.string().min(1), href: z.url() })),
+  /** Id in `downloadTotalFamilies` whose combined npm downloads the card shows. */
+  downloadTotalId: z.string().optional(),
 });
 export type Experiment = z.infer<typeof experimentSchema>;
 
@@ -123,5 +125,15 @@ export const packageStatsFileSchema = z.object({
       period: z.object({ start: z.string(), end: z.string() }),
     }),
   ),
+  totals: z
+    .array(
+      z.object({
+        id: z.string().min(1),
+        packages: z.array(z.string().min(1)).min(1),
+        downloads: z.number().int().nonnegative(),
+        period: z.object({ start: z.string(), end: z.string() }),
+      }),
+    )
+    .default([]),
 });
 export type PackageStatsFile = z.infer<typeof packageStatsFileSchema>;

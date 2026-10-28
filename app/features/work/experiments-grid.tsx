@@ -1,8 +1,18 @@
 import { experiments } from "~/content/experiments";
 import { FadeUp } from "~/shared/motion/fade-up";
 
+export interface DownloadTotal {
+  downloads: number;
+  period: { start: string; end: string };
+}
+
+interface ExperimentsGridProps {
+  /** Combined npm downloads by family id, from the loader (PRD §10.5). */
+  downloadTotals: Readonly<Record<string, DownloadTotal>>;
+}
+
 /** Compact text-only experiments grid (PRD §6.5, §10.4). */
-export function ExperimentsGrid() {
+export function ExperimentsGrid({ downloadTotals }: ExperimentsGridProps) {
   return (
     <div className="mt-32">
       <h3 className="type-label text-text-muted">Experiments</h3>
@@ -17,6 +27,9 @@ export function ExperimentsGrid() {
             <p className="type-label text-accent-text">{experiment.label}</p>
             <p className="type-heading-md text-text">{experiment.name}</p>
             <p className="text-text-muted">{experiment.description}</p>
+            {experiment.downloadTotalId && downloadTotals[experiment.downloadTotalId] ? (
+              <DownloadCount total={downloadTotals[experiment.downloadTotalId]} />
+            ) : null}
             {experiment.links.length > 0 ? (
               <ul className="mt-auto flex flex-wrap gap-4 pt-2">
                 {experiment.links.map((link) => (
@@ -38,5 +51,16 @@ export function ExperimentsGrid() {
         ))}
       </ul>
     </div>
+  );
+}
+
+function DownloadCount({ total }: { total: DownloadTotal | undefined }) {
+  if (!total) return null;
+  const source = `npm downloads API, ${total.period.start} to ${total.period.end}`;
+  return (
+    <p className="type-label text-text" title={`Source: ${source}`}>
+      {total.downloads.toLocaleString("en-GB")} npm downloads
+      <span className="sr-only"> (source: {source})</span>
+    </p>
   );
 }
