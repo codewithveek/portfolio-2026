@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Owner** | Lucky Victory Success (Veek / CodewithVeek) |
-| **Status** | In build: M0–M4 implemented, M5 partly (see §14 for open items) |
+| **Status** | Live on veek.me since 2026-10-28 (M6 cutover). M5 partly done; open items in §14 |
 | **Last updated** | 2026-10-22 |
 | **Repo** | `codewithveek/portfolio-2026` |
 | **Replaces** | `codewithveek/my-portfolio` (v5, Next.js on Vercel) |
@@ -716,6 +716,7 @@ Work on a feature branch per milestone; open a PR per milestone. **Production de
 - Deploy to production on the Worker's `workers.dev` URL, then QA on real devices (iPhone Safari, Android Chrome, desktop Chrome/Firefox/Safari).
 - Cutover: add the Worker custom domains (§9.5), remove the Vercel DNS records for `veek.me`/`www`, confirm HTTPS and redirects. Keep the Vercel project for two weeks as a rollback.
 - ✅ Accept when: `veek.me` is served by the Worker (`server: cloudflare`), the contact form delivers to the inbox, and analytics events appear.
+- **Status (2026-10-28):** `veek.me` and `www.veek.me` are Worker custom domains; HTTPS, `www` → apex and trailing-slash 301s, and edge caching (`cf-cache-status: HIT`) verified. Pending: real-device QA, contact delivery (needs `CONTACT_INBOX`), analytics check. Rollback: `docs/runbooks/cutover-rollback.md`.
 
 ## 12. Quality requirements
 

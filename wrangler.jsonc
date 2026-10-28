@@ -1,6 +1,5 @@
 /**
  * Worker configuration (PRD §9.5).
- * `routes` (custom domains) are added only at cutover (PRD §11, M6).
  */
 {
   "$schema": "node_modules/wrangler/config-schema.json",
@@ -38,6 +37,11 @@
       "binding": "EVENTS",
       "dataset": "veek_portfolio_events",
     },
+  ],
+  // Custom domains (PRD §9.5, M6 cutover 2026-10-28). www redirects to the apex in workers/app.ts.
+  "routes": [
+    { "pattern": "veek.me", "custom_domain": true },
+    { "pattern": "www.veek.me", "custom_domain": true },
   ],
   "vars": {
     // Public Turnstile site key for the contact widget (action "contact").

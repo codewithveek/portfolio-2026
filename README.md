@@ -23,4 +23,4 @@ Checks: `pnpm typecheck`, `pnpm lint`, `pnpm test`, `pnpm test:e2e`. All command
 - **Motion** (`app/shared/motion/`): tokens in `motion-tokens.ts`; triggered reveals are CSS gated on `<html data-motion-ready>`; scroll-linked effects use Motion; Lenis only on fine pointers. Everything has a reduced-motion fallback.
 - **Contact** (`app/features/contact/`): Zod validation, honeypot and timing check, Turnstile, rate limiting, D1 via Drizzle, then the `send_email` binding. A failed email never loses a message.
 
-Status: M0–M4 built; M5 partly (OG images, sitemap, robots, JSON-LD, headers, 404 done; voice note and résumé PDFs pending). Production deploy and DNS cutover need Lucky's go-ahead.
+Status: live at https://veek.me (Cloudflare Worker `veek-portfolio`, cut over 2026-10-28; rollback steps in `docs/runbooks/cutover-rollback.md`). M5 partly done: voice note, résumé PDFs and the contact inbox are pending. Production deploys need Lucky's go-ahead.
