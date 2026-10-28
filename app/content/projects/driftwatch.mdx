@@ -9,8 +9,9 @@ period:
   start: "2026-07"
   end: null
 status: open-source
-stack: [TypeScript, OpenTelemetry, Vercel AI SDK, SigNoz, pnpm workspaces]
+stack: [TypeScript, OpenTelemetry, Prometheus, Vercel AI SDK, SigNoz, pnpm workspaces]
 links:
+  repo: https://github.com/codewithveek/drift-watch
   npm: https://www.npmjs.com/package/@driftwatch/sdk
   docs: https://drift-watch-docs.vercel.app
   article: https://dev.to/codewithveek/detecting-ai-agent-behavioral-drift-with-opentelemetry-and-signoz-3d98
@@ -24,7 +25,7 @@ architecture:
   - { label: "agent (vercel ai sdk)", detail: "Your agent, your providers", depth: 0, start: 0, width: 1 }
   - { label: "@driftwatch/sdk", detail: "Every tool call and model step as an OpenTelemetry span", depth: 1, start: 0, width: 0.7 }
   - { label: "otel export", detail: "SigNoz or any OTLP backend", depth: 1, start: 0.72, width: 0.28 }
-  - { label: "drift watcher", detail: "Tool-call mix, error rate, latency, token spend", depth: 2, start: 0.08, width: 0.44 }
+  - { label: "drift watcher", detail: "Prometheus metrics: tool-call mix, error rate, latency, token spend", depth: 2, start: 0.08, width: 0.44 }
   - { label: "@driftwatch/autopilot", detail: "Notify, pause, roll back or throttle", depth: 3, start: 0.2, width: 0.42 }
   - { label: "human approval", detail: "Required for destructive actions", depth: 4, start: 0.36, width: 0.26 }
   - { label: "server + console", detail: "@driftwatch/server, @driftwatch/console", depth: 2, start: 0.56, width: 0.44 }
@@ -51,6 +52,6 @@ next:
 
 DriftWatch wraps an agent built on the **Vercel AI SDK**. Every tool call and model step becomes an **OpenTelemetry** span, so the agent's behaviour shows up in SigNoz or any OTLP backend next to the rest of the system.
 
-A **watcher** model reads that telemetry and looks for drift: changes in the tool-call mix, error rate, latency and token spend.
+A **drift watcher** reads Prometheus metrics built from that telemetry and looks for behavioural drift: changes in the tool-call mix, error rate, latency and token spend.
 
 When drift crosses a policy, **`@driftwatch/autopilot`** responds. It can notify, pause, roll back or throttle, and destructive actions wait for a human to approve them. `@driftwatch/server` and `@driftwatch/console` give the team a place to see and act on it.

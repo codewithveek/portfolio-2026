@@ -1,7 +1,20 @@
 {
-  "fetchedAt": "2026-10-22T15:22:08.540Z",
+  "fetchedAt": "2026-10-28T11:12:13.418Z",
   "source": "https://dev.to/api/articles?username=codewithveek",
   "articles": [
+    {
+      "title": "Too lazy to read my newsletters, so I built an AI that reads them to me",
+      "url": "https://dev.to/codewithveek/too-lazy-to-read-my-newsletters-so-i-built-an-ai-that-reads-them-to-me-i85",
+      "publishedAt": "2026-10-26T05:58:57.000Z",
+      "readingTimeMinutes": 12,
+      "tags": [
+        "devchallenge",
+        "hf26challenge",
+        "ai",
+        "opensource"
+      ],
+      "publication": "codewithveek"
+    },
     {
       "title": "We ship every week now. Our launch videos don't. So I built Cutroom.",
       "url": "https://dev.to/codewithveek/we-ship-every-week-now-our-launch-videos-dont-so-i-built-cutroom-n3l",

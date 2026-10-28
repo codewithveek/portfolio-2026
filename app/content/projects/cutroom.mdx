@@ -2,14 +2,14 @@
 slug: cutroom
 order: 4
 title: Cutroom
-tagline: Turn a codebase into product videos, on open models.
-summary: Reads a repo, writes a brief where every feature cites file-and-line evidence, audits every claim against the code, and renders the video.
+tagline: Turn a codebase into product videos, with every claim checked against the code.
+summary: An agentic video maker that turns a codebase into launch, tutorial and explainer videos, with a storyboard and timeline editor and every claim checked against the code.
 role: Creator
 period:
   start: "2026-10"
   end: null
 status: hackathon
-stack: [TypeScript, Remotion, Gemma, Kokoro, Node.js]
+stack: [TypeScript, React, Remotion, Gemma, ElevenLabs, Kokoro, Node.js]
 links:
   npm: https://www.npmjs.com/package/cutroom
   article: https://dev.to/codewithveek/we-ship-every-week-now-our-launch-videos-dont-so-i-built-cutroom-n3l
@@ -41,6 +41,7 @@ decisions:
 shipped:
   - Built for the DEV Hacktoberfest 2026 open-source AI challenge.
   - Published on npm as cutroom (npx cutroom demo), with deploy buttons for Render and DigitalOcean.
+  - A storyboard and timeline editor for product launch, tutorial and explainer videos.
   - Local mode runs fully offline with Gemma reasoning and Kokoro voice.
 next:
   - Launch cutroom.tech.
@@ -50,6 +51,6 @@ Cutroom starts by **reading the repository**, redacting secrets before anything 
 
 It writes a **product brief** in which every feature cites file-and-line evidence, then a **storyboard**. Before rendering, it **audits every claim** against the code: UI labels, code excerpts, numbers and commands, and finally a Gemma judge.
 
-A person approves the cut. Then **Remotion** renders the video and the audio is normalised to −16 LUFS.
+A person reviews and adjusts the cut in the **storyboard and timeline editor**, built in React. Then **Remotion** renders the video, narrated with ElevenLabs, and the audio is normalised to −16 LUFS.
 
 In **local mode** the whole pipeline runs offline, with Gemma for reasoning and Kokoro for the voice. A privacy guard and an egress guard are enforced in code, not in documentation.

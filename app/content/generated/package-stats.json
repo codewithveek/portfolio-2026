@@ -1,53 +1,61 @@
 {
-  "fetchedAt": "2026-10-22T15:22:09.007Z",
+  "fetchedAt": "2026-10-28T11:12:14.102Z",
   "source": "https://api.npmjs.org/downloads/point/last-month/{package}",
   "packages": [
     {
       "name": "@afriex/sdk",
-      "downloadsLastMonth": 268,
+      "downloadsLastMonth": 331,
       "period": {
-        "start": "2026-09-19",
-        "end": "2026-10-18"
+        "start": "2026-09-27",
+        "end": "2026-10-26"
       }
     },
     {
       "name": "medusa-payment-afriex",
-      "downloadsLastMonth": 355,
+      "downloadsLastMonth": 199,
       "period": {
-        "start": "2026-09-19",
-        "end": "2026-10-18"
+        "start": "2026-09-27",
+        "end": "2026-10-26"
       }
     },
     {
       "name": "@driftwatch/sdk",
-      "downloadsLastMonth": 40,
+      "downloadsLastMonth": 44,
       "period": {
-        "start": "2026-09-19",
-        "end": "2026-10-18"
+        "start": "2026-09-27",
+        "end": "2026-10-26"
       }
     },
     {
       "name": "cutroom",
-      "downloadsLastMonth": 287,
+      "downloadsLastMonth": 316,
       "period": {
-        "start": "2026-09-19",
-        "end": "2026-10-18"
+        "start": "2026-09-27",
+        "end": "2026-10-26"
       }
     },
     {
       "name": "@fluxmedia/core",
-      "downloadsLastMonth": 64,
+      "downloadsLastMonth": 36,
       "period": {
-        "start": "2026-09-19",
-        "end": "2026-10-18"
+        "start": "2026-09-27",
+        "end": "2026-10-26"
       }
     },
     {
       "name": "@hymem/core",
-      "downloadsLastMonth": 21,
+      "downloadsLastMonth": 17,
       "period": {
-        "start": "2026-09-19",
-        "end": "2026-10-18"
+        "start": "2026-09-27",
+        "end": "2026-10-26"
+      }
+    },
+    {
+      "name": "@pii-mask/core",
+      "downloadsLastMonth": 2880,
+      "period": {
+        "start": "2026-09-27",
+        "end": "2026-10-26"
       }
     }
   ]

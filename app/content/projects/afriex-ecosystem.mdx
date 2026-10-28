@@ -2,14 +2,14 @@
 slug: afriex-ecosystem
 order: 2
 title: Afriex developer ecosystem
-tagline: An SDK, two commerce plugins and 16+ guides for cross-border payment integrations.
+tagline: An SDK, two commerce plugins and 18 guides for cross-border payment integrations.
 summary: The official TypeScript SDK for the Afriex Business API, Medusa and WooCommerce plugins, example apps, and the guides that teach them.
-role: "[Lucky] relationship wording: employee, contractor or community contributor"
+role: Developer Relations Engineer
 period:
   start: "2026-04"
   end: "2026-10"
 status: open-source
-stack: [TypeScript, Node.js, Medusa v2, WordPress, WooCommerce, Fastify, Next.js]
+stack: [TypeScript, Node.js, Medusa v2, WordPress, WooCommerce, Fastify, PostgreSQL, Drizzle, Next.js]
 links:
   npm: https://www.npmjs.com/package/@afriex/sdk
   docs: https://afriex-sdk-docs.vercel.app
@@ -24,7 +24,7 @@ problem:
 architecture:
   - { label: "afriex business api", detail: "Customers, transactions, payment methods, balances, rates, webhooks", depth: 0, start: 0, width: 1 }
   - { label: "@afriex/sdk", detail: "Official TypeScript SDK (npm maintainer)", depth: 1, start: 0, width: 0.6 }
-  - { label: "guides", detail: "16+ articles on Afriex's DEV organisation", depth: 1, start: 0.62, width: 0.38 }
+  - { label: "guides", detail: "18 articles on Afriex's DEV publication", depth: 1, start: 0.62, width: 0.38 }
   - { label: "medusa-payment-afriex", detail: "Medusa v2: bank transfer, Afriex Checkout, verified webhooks", depth: 2, start: 0, width: 0.29 }
   - { label: "woocommerce gateway", detail: "Classic and block checkout", depth: 2, start: 0.31, width: 0.29 }
   - { label: "example apps", detail: "afriex-checkout, afriex-creator-payout", depth: 2, start: 0.62, width: 0.38 }
@@ -45,8 +45,8 @@ shipped:
   - "@afriex/sdk on npm, with docs at afriex-sdk-docs.vercel.app."
   - medusa-payment-afriex for Medusa v2, with bank transfer, Afriex Checkout, verified webhooks and per-region toggles.
   - Afriex Gateway for WooCommerce, supporting classic and block checkout.
-  - Example apps afriex-checkout and afriex-creator-payout, with the two-part "Build a Digital Marketplace" series.
-  - 16+ articles on webhooks, idempotency and sandbox, virtual accounts, mobile money, stablecoin settlement and MCP agents.
+  - Reference apps for the Business API, including a digital marketplace with checkout and creator payouts (Fastify, PostgreSQL, Drizzle, with a Next.js storefront).
+  - 18 articles on Afriex's DEV publication, including build-alongs for a freelancer payout platform, a remittance app and a two-part marketplace series, and guides on webhooks, idempotency and sandbox, virtual accounts, mobile money, stablecoin settlement and MCP agents.
 next:
   - "[Lucky] what comes next for the ecosystem"
 ---
@@ -55,4 +55,4 @@ The base layer is **`@afriex/sdk`**, the official TypeScript SDK for the Afriex 
 
 On top of it sit two commerce plugins. **`medusa-payment-afriex`** adds bank transfer and Afriex Checkout to Medusa v2 stores, verifies webhooks and can be switched on per region. The **Afriex Gateway for WooCommerce** brings the same to WordPress, in classic and block checkout.
 
-The **example apps** (`afriex-checkout`, `afriex-creator-payout`) are the code behind the guides, including the two-part *Build a Digital Marketplace with Afriex, Fastify and Postgres* series.
+The **reference apps** are the code behind the guides. The digital marketplace pairs a Fastify, PostgreSQL and Drizzle backend for checkout and creator payouts with a Next.js storefront (Tailwind CSS, React Hook Form, Zod, TanStack Query), and is written up as the two-part *Build a Digital Marketplace with Afriex, Fastify and Postgres* series.

@@ -61,7 +61,7 @@ The current site (v5) has four problems that cost interviews:
 | DevRel lead | 3–10 min | Can he teach, write, build community and SDKs | Afriex ecosystem case study, writing section, Scrimba proof, voice note |
 | Founder (contract work) | 1–3 min | Can he ship a whole product | Zia case study, testimonials |
 
-Location line used everywhere: **Lagos, Nigeria · WAT (UTC+1) · open to remote**. UTC+1 overlaps the full European working day and US East Coast mornings; say so in the About copy.
+Location line used everywhere: **Lagos, Nigeria · WAT (UTC+1) · open to remote and relocation**. UTC+1 overlaps the full European working day and US East Coast mornings; say so in the About copy.
 
 ## 4. Positioning and core copy
 
@@ -71,7 +71,7 @@ Use this copy as the starting point. Plain, direct sentences; no buzzwords.
 - **Hero label (mono):** ● OPEN TO ROLES · LAGOS · WAT (UTC+1)
 - **Hero sentence:** Backend & full-stack engineer building payment systems, AI agent tooling and developer tools — and writing about all three.
 - **Primary CTA:** See my work → (scrolls to `#work`)
-- **Secondary CTA:** Résumé (opens a two-item menu: Engineering / DevRel PDFs)
+- **Secondary CTA:** Résumé (opens a two-item menu: Backend / Frontend PDFs, in `public/resume/`)
 - **Top-right and dock CTA:** Hire me → (scrolls to `#contact`)
 - **Positioning sequence (§6.3):** "I build software that…" → *moves money* · *watches agents* · *ships to customers* · *explains itself*
 - **Closing headline:** LET'S BUILD WHAT'S NEXT
@@ -85,7 +85,7 @@ Title tag: `Lucky Victory — Backend & Full-Stack Engineer`. Meta description: 
 | `/` | Home, the conversion page (§6) | SSR + edge cache (§9.2) |
 | `/work/:slug` | Case study (§6.10) | SSR + edge cache |
 | `/writing` | All articles: featured first, then the DEV feed, filterable by topic | SSR + edge cache |
-| `/resume/engineering.pdf`, `/resume/devrel.pdf` | Static PDFs | Static asset |
+| `/resume/lucky-victory-backend-engineer.pdf`, `/resume/lucky-victory-frontend-engineer.pdf` | Static PDFs | Static asset |
 | `/api/contact` | Contact form action (POST only) | Worker, never cached |
 | `/api/events` | Analytics beacon (POST only) | Worker, never cached |
 | `/sitemap.xml`, `/robots.txt` | SEO | Generated at build |
@@ -158,7 +158,7 @@ Reference: `docs/design/hero-mock.png` (rough mock with the real graded portrait
 
 **Mobile:** no stacking. Each project is a block: media card, then title, summary, tags and link.
 
-**Content:** the five featured projects in §10.1, in this order: Zia, Afriex developer ecosystem, DriftWatch, Cutroom, Nippyy backend. Below the stack, a compact **Experiments** grid (3 columns, text-only cards with a mono label): Vetit, hymem, FluxMedia, MediWatch, KlozBuy, Claude skills.
+**Content:** the five featured projects in §10.1, in this order: Zia, Afriex developer ecosystem, DriftWatch, Cutroom, Nippyy backend. Below the stack, a compact **Experiments** grid (3 columns, text-only cards with a mono label): pii-mask, Vetit, hymem, FluxMedia, MediWatch, Claude skills (KlozBuy removed at Lucky's request, 2026-10-28).
 
 **Motion:** `stack-cards`, `index-crossfade`, `cursor-label` ("View case study"), `card-to-case-study` (View Transition on click).
 
@@ -589,7 +589,7 @@ Never invent numbers. Every metric shown on the site needs a `source` (§10.5). 
 
 **01 · Zia** (`/work/zia`)
 - Tagline: Inventory forecasting and reordering for Shopify merchants.
-- Role: Founder & engineer, end to end. Period: Jul 2026 – present. Status: live (`getzia.xyz`, app at `app.getzia.xyz`).
+- Role: Founder & engineer, end to end. Period: Sep 2026 – present (per Lucky's résumés, Oct 2026). Status: live (`getzia.xyz`, app at `app.getzia.xyz`).
 - What to show: embedded Shopify app and standalone dashboard; purchase orders, supplier mapping, rule-based forecasts (not marketed as AI), Shopify sync and billing, plan-based seat limits (Starter/Growth/Scale), API keys, 30-day soft-delete and restore of organisations; Zia AI assistant (model-agnostic harness, monthly AI credits, actions that need confirmation); internal staff console on its own Worker (separate staff accounts, required 2FA, owner/admin/support/analyst roles, audit log).
 - Architecture story: **two builds kept in feature parity**, Node (`server/` + `client/`) and Cloudflare Workers (`cloudflare/api` + `cloudflare/web`), on TiDB, with better-auth (organisations, 2FA, admin, API keys). The trade-off section should explain why.
 - Repo is private: show screenshots and diagrams, no repo link.
@@ -603,13 +603,13 @@ Never invent numbers. Every metric shown on the site needs a `source` (§10.5). 
   - Afriex Gateway for WooCommerce (WordPress plugin, classic and block checkout).
   - Example apps: `afriex-checkout`, `afriex-creator-payout` (with the two-part "Build a Digital Marketplace" series).
   - 16+ articles published on the Afriex DEV organisation (webhooks, idempotency and sandbox, virtual accounts, mobile money collection, stablecoin settlement, MCP agents, comparisons).
-- Relationship wording: **[Lucky]** (employee, contractor or community contributor). Do not imply employment until confirmed.
+- Role: Developer Relations Engineer, Apr–Oct 2026 (per Lucky's résumés). 18 articles on Afriex's DEV publication.
 - Metrics: npm downloads via `package-stats.json` (shown when ≥ 100/month); article count from the feed.
 - Note for the old site's bug: the v5 site linked the archived `codewithveek/afriex-sdk`; link the current repo/package.
 
 **03 · DriftWatch** (`/work/driftwatch`)
 - Tagline: A self-observing AI agent SDK.
-- What it does: traces every tool call and model step as OpenTelemetry; a model watches that telemetry for behavioural drift (tool-call mix, error rate, latency, token spend); a policy-driven autopilot notifies, pauses, rolls back or throttles, with human approval for destructive actions.
+- What it does: traces every tool call and model step as OpenTelemetry; drift is detected from Prometheus metrics built from that telemetry (tool-call mix, error rate, latency, token spend); a policy-driven autopilot notifies, pauses, rolls back or throttles, with human approval for destructive actions.
 - Facts: MIT, pnpm monorepo (Node ≥ 22), packages `@driftwatch/sdk`, `@driftwatch/autopilot`, `@driftwatch/server`, `@driftwatch/console`; layers over the Vercel AI SDK, brings no provider SDKs, reads no env vars itself. Docs: `drift-watch-docs.vercel.app`. Articles: "Detecting AI Agent Behavioral Drift with OpenTelemetry and SigNoz", "AI Agent observability with DriftWatch and SigNoz".
 - Media: SigNoz dashboards and a trace flame graph (Lucky has these).
 - **Before launch:** consolidate `drift-watch` (canonical, few commits) and `drift-watch-legacy` (history) so reviewers do not find two repos with identical READMEs. **[Lucky]**
@@ -668,11 +668,11 @@ Do not show reaction or comment counts.
 
 | Name | One line | Link |
 |---|---|---|
+| pii-mask | Zero-dependency TypeScript PII masking: 31 detectors (including NIN and BVN), six modes including reversible tokenization, React bindings; four npm packages, 9,000+ combined downloads. | repo, npm |
 | Vetit | Reviews an MCP server, probes how its tools behave, and writes a least-privilege grant a human approves (Agent Harness Hackathon, Aug 2026). | repo |
 | hymem | Bitemporal, multi-tenant memory for AI agents with pluggable storage (`@hymem/core`). | repo, npm |
 | FluxMedia | One TypeScript upload API across Cloudinary, S3 and R2 (`@fluxmedia/core`). | fluxmedia.dev |
 | MediWatch | Vision-agent pipeline (YOLO + Moondream + Gemini) on Stream's Vision Agents SDK, built for a hackathon. | repo |
-| KlozBuy | Hyper-local social commerce marketplace for Nigeria (Next.js, Drizzle, TiDB). | repo |
 | Claude skills | Public skills including product videos and database schema engineering. | `codewithveek/skills` |
 
 ### 10.5 Proof and metrics rules
@@ -754,20 +754,20 @@ Work on a feature branch per milestone; open a PR per milestone. **Production de
 
 ## 14. Open items for Lucky
 
-1. **Afriex relationship wording** (employee, contractor, community contributor) for the ecosystem case study.
-2. **Experience timeline:** up to five rows (role, organisation, years).
+1. ~~Afriex relationship wording~~ Resolved from the résumés: Developer Relations Engineer, Apr–Oct 2026.
+2. ~~Experience timeline~~ Filled from the résumés (Zia, Afriex, Nippyy, freelance) plus Scrimba.
 3. **Hackathon wins:** event, project, placement, link for each (the v5 site says "6x").
 4. **Scrimba:** still community manager, or end year?
 5. **Zia metrics** you are comfortable publishing, with their source.
-6. **Nippyy:** what can be shown publicly.
+6. ~~Nippyy~~ Role and public details taken from the résumés: Software Engineer (part-time, remote), Oct 2025 – present.
 7. **DriftWatch repos:** consolidate before launch?
 8. **Booking link** (Cal.com or similar) for "Book a 20-min call".
-9. **Résumés:** engineering and DevRel PDFs.
+9. ~~Résumés~~ Backend and frontend PDFs added (2026-10-28). A DevRel résumé would add a third menu item.
 10. **Higher-resolution portrait** if available.
 11. **Voice note:** record 20–30 s. Draft to rewrite in your own words: "Hi, I'm Lucky. I build backend systems for payments and tools for AI agents, and I write about both. Lately that's Zia, an inventory product for Shopify merchants, and DriftWatch, an open-source SDK for watching agents in production. I'm looking for my next role in backend, full-stack or DevRel. If that's you, the button's right below."
 12. **Media:** Zia screenshots, DriftWatch SigNoz dashboards, a Cutroom-rendered video, Nippyy architecture notes. Until then, cards show a trace cover generated from each project's `architecture` spans (`docs/decisions/0003-generated-project-covers.md`).
-13. **LinkedIn URL** for the footer and JSON-LD (`app/content/site.ts`).
-14. **Repo links** for MediWatch and KlozBuy (`app/content/experiments.ts`).
+13. ~~LinkedIn URL~~ Added: linkedin.com/in/lucky-victory-success.
+14. **Repo link** for MediWatch (`app/content/experiments.ts`). KlozBuy was removed.
 15. **Cloudflare setup:** D1 created and migrated, Turnstile widget `0x4AAAAAAFisNj5DU2mpX_9j` wired with its secret stored as `TURNSTILE_SECRET_KEY` on the `veek-portfolio` Worker (2026-10-23), live at `https://veek-portfolio.codewithveek.workers.dev`. Still to do: set the `CONTACT_INBOX` secret (a verified Email Routing destination), onboard `veek.me` as an Email Service sending domain, and add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` to GitHub secrets for preview uploads.
 
 ## 15. Appendix: reference analysis (bmwf3.com)

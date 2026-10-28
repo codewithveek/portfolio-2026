@@ -8,6 +8,7 @@ export const maintainedPackages = [
   "cutroom",
   "@fluxmedia/core",
   "@hymem/core",
+  "@pii-mask/core",
 ] as const;
 
 export interface HackathonWin {

@@ -2,19 +2,25 @@
 slug: nippyy-backend
 order: 5
 title: Nippyy backend
-tagline: Backend foundations for a cross-border fintech product.
-summary: Access control across nine fintech roles, NIBSS-compliant transaction utilities, an OCR extraction pipeline and distributed tracing, on Fastify and TypeScript.
-role: "[Lucky] role"
+tagline: Backend foundations, web and mobile apps for a cross-border fintech product.
+summary: Access control across nine fintech roles, ledger-safe fund reservations, 9PSB and NIBSS integrations, and the web and mobile apps built on them.
+role: Software Engineer (part-time, remote)
 period:
-  start: "[Lucky]"
+  start: "2025-10"
   end: null
 status: private
-stack: [TypeScript, Fastify, BullMQ, Google Cloud Vision, Claude tool use]
+stack: [TypeScript, Fastify, MongoDB, Mongoose, BullMQ, Next.js, React Native, Expo]
 links: {}
 cover:
   alt: Trace diagram of the Nippyy backend, with access control, NIBSS utilities, OCR pipeline and integrations.
-metrics: []
-confidentiality: "Private repository. Diagrams and descriptions only. [Lucky] confirm what can be shown publicly."
+metrics:
+  - label: Faster API responses
+    value: "60%"
+    source: "Lucky's résumé (Oct 2026): optimised database indexes, fewer round trips and a caching layer"
+  - label: Fewer duplicate records
+    value: "50%"
+    source: "Lucky's résumé (Oct 2026): database schema redesign"
+confidentiality: Private repository. Diagrams and descriptions only.
 problem:
   - A cross-border fintech product needs foundations that regulators, operators and auditors can all rely on before the first feature ships.
   - That means fine-grained access control with approvals, transaction identifiers that match the national switch's spec, document intake that does not depend on manual typing, and requests that can be traced across services.
@@ -24,7 +30,8 @@ architecture:
   - { label: "access control", detail: "RBAC + ABAC + maker-checker across nine roles", depth: 2, start: 0, width: 0.32 }
   - { label: "nibss utilities", detail: "Session IDs and transaction references", depth: 2, start: 0.34, width: 0.3 }
   - { label: "ocr pipeline", detail: "Cloud Vision + Claude tool use on BullMQ", depth: 2, start: 0.66, width: 0.34 }
-  - { label: "integrations", detail: "Afriex, 9PSB", depth: 3, start: 0.34, width: 0.3 }
+  - { label: "integrations", detail: "9PSB wallet-as-a-service and VAS, Afriex", depth: 3, start: 0.34, width: 0.3 }
+  - { label: "fund reservations", detail: "Balance locks as ledger records, TTL sweep, reconciliation", depth: 3, start: 0, width: 0.32 }
 decisions:
   - chose: Combining RBAC, ABAC and maker-checker approvals
     over: Roles alone
@@ -34,11 +41,18 @@ decisions:
     over: A single OCR service
     because: "[Lucky] confirm the reason for the hybrid design"
     cost: Two providers to run, queue and monitor through BullMQ.
+  - chose: Ledger records for wallet balance locks
+    over: A held-balance flag on the wallet
+    because: Every reservation is traceable, and a TTL sweep can recover funds a failed flow left locked.
+    cost: A sweep job and reconciliation to run and watch for balance drift.
 shipped:
-  - Access-control module combining RBAC, ABAC and maker-checker approvals across nine fintech roles.
+  - Access-control module combining RBAC, ABAC and maker-checker approvals across nine fintech roles, shipped as a reusable Mongoose plugin.
+  - Fund reservation system that turns wallet balance locks into traceable ledger records, with MongoDB transactions for atomicity, TTL expiry plus a sweep job to recover stuck funds, and reconciliation to detect balance drift.
+  - 9PSB wallet-as-a-service and value-added services (VAS) integrations.
+  - Led the web app (Next.js) and native mobile app (React Native, Expo) built on these APIs, with Zustand for state and TanStack Query for data fetching.
   - NIBSS-compliant session ID and transaction reference utilities, validated against real transaction samples, including spec discrepancies found along the way.
   - OCR and field-extraction pipeline with Google Cloud Vision and Claude tool use on BullMQ.
-  - Correlation IDs for distributed tracing, and integrations with Afriex and 9PSB.
+  - Correlation IDs for end-to-end request tracing.
 next:
   - "[Lucky] what comes next"
 ---
@@ -46,6 +60,8 @@ next:
 Every request through the **Fastify** API carries a **correlation ID**, so a single operation can be traced across services and queues.
 
 The **access-control module** combines role-based and attribute-based rules with **maker-checker** approvals across nine fintech roles: one person proposes a sensitive action and another approves it.
+
+**Fund reservations** turn wallet balance locks into ledger records inside MongoDB transactions. Each lock has a TTL; a sweep job releases stuck funds, and reconciliation flags any drift between ledger and balance.
 
 The **NIBSS utilities** generate and validate session IDs and transaction references. They were checked against real transaction samples, which surfaced discrepancies in the spec itself.
 

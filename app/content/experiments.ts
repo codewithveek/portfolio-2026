@@ -3,6 +3,16 @@ import type { Experiment } from "./schemas";
 /** Experiments grid under the work stack (PRD §6.5, §10.4). */
 export const experiments: readonly Experiment[] = [
   {
+    name: "pii-mask",
+    label: "@pii-mask/core · open source",
+    description:
+      "Zero-dependency TypeScript PII masking with 31 detectors (including Nigerian NIN and BVN), six modes including reversible tokenization, and React bindings.",
+    links: [
+      { label: "Repo", href: "https://github.com/codewithveek/pii-mask" },
+      { label: "npm", href: "https://www.npmjs.com/package/@pii-mask/core" },
+    ],
+  },
+  {
     name: "Vetit",
     label: "Agent Harness Hackathon · Aug 2026",
     description:
@@ -33,13 +43,6 @@ export const experiments: readonly Experiment[] = [
     name: "MediWatch",
     label: "Hackathon",
     description: "Vision-agent pipeline (YOLO + Moondream + Gemini) on Stream's Vision Agents SDK.",
-    // Repo link pending (PRD §14): add it here once confirmed.
-    links: [],
-  },
-  {
-    name: "KlozBuy",
-    label: "Next.js · Drizzle · TiDB",
-    description: "Hyper-local social commerce marketplace for Nigeria.",
     // Repo link pending (PRD §14): add it here once confirmed.
     links: [],
   },
