@@ -7,7 +7,7 @@ Lucky Victory's portfolio. React Router v8 (framework mode) on Cloudflare Worker
 ## Working rules
 
 - Work milestone by milestone (PRD §11). One feature branch and one PR per milestone. Open PRs only when asked; never push to `main` directly.
-- **Never deploy to production or change DNS without Lucky's explicit go-ahead.** Preview uploads (`wrangler versions upload`) are fine.
+- **Deploys:** Lucky gave standing approval (2026-10-28) to deploy to production (`pnpm build && wrangler deploy --var BUILD_ID:<sha>-<time>`) after every change, once typecheck, lint, unit and e2e tests pass. **DNS, custom-domain and secret changes still need his explicit go-ahead.** Preview uploads (`wrangler versions upload`) are always fine.
 - Never print secret values. Secrets go in `wrangler secret put` and `.dev.vars` (git-ignored); `.dev.vars.example` holds placeholders only.
 - Never invent metrics, quotes or facts. Unknowns use a `[Lucky]` placeholder, which must not render in production (PRD §10.5).
 - Features must work end to end, not just in the UI. Explain how non-obvious pieces work in the PR description.
