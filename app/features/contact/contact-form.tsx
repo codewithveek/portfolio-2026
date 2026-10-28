@@ -63,7 +63,7 @@ export function ContactForm({
       <div role="status" className="rounded-card border border-accent-text/40 bg-surface p-8">
         <p className="type-label text-accent-text">Message received</p>
         <p className="type-body-lg mt-3 text-text">
-          Thanks — I'll reply from {site.email}, usually within two working days.
+          Thanks — I'll reply from {site.email}, usually within a few hours.
         </p>
       </div>
     );
