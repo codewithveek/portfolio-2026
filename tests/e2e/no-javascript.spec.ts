@@ -14,13 +14,7 @@ test.describe("without JavaScript (PRD §2.3, §12.3)", () => {
     }
     await expect(page.getByText("Articles published")).toBeVisible();
     await expect(page.getByRole("heading", { name: "Things I've built" })).toBeVisible();
-    for (const title of [
-      "Zia",
-      "Afriex developer ecosystem",
-      "DriftWatch",
-      "Cutroom",
-      "Nippyy backend",
-    ]) {
+    for (const title of ["Zia", "Afriex developer ecosystem", "DriftWatch", "Cutroom", "Nippyy"]) {
       await expect(page.getByRole("heading", { level: 3, name: title })).toBeVisible();
     }
     await expect(page.getByText(/I like the unglamorous parts/)).toBeVisible();

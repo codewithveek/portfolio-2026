@@ -158,7 +158,7 @@ Reference: `docs/design/hero-mock.png` (rough mock with the real graded portrait
 
 **Mobile:** no stacking. Each project is a block: media card, then title, summary, tags and link.
 
-**Content:** the five featured projects in §10.1, in this order: Zia, Afriex developer ecosystem, DriftWatch, Cutroom, Nippyy backend. Below the stack, a compact **Experiments** grid (3 columns, text-only cards with a mono label): pii-mask, Vetit, hymem, FluxMedia, MediWatch, Claude skills (KlozBuy removed at Lucky's request, 2026-10-28).
+**Content:** the five featured projects in §10.1, in this order: Zia, Afriex developer ecosystem, DriftWatch, Cutroom, Nippyy. Below the stack, a compact **Experiments** grid (3 columns, text-only cards with a mono label): pii-mask, Vetit, hymem, FluxMedia, MediWatch, Claude skills (KlozBuy removed at Lucky's request, 2026-10-28).
 
 **Motion:** `stack-cards`, `index-crossfade`, `cursor-label` ("View case study"), `card-to-case-study` (View Transition on click).
 
@@ -621,7 +621,7 @@ Never invent numbers. Every metric shown on the site needs a `source` (§10.5). 
 - Media: a real Cutroom-rendered video as the case-study loop. This is also the most visual project, so it should have the strongest media.
 - Domain `cutroom.tech` planned; link only once live.
 
-**05 · Nippyy backend** (`/work/nippyy-backend`)
+**05 · Nippyy** (`/work/nippyy-backend`)
 - Tagline: Backend foundations for a cross-border fintech product.
 - What to show (Fastify + TypeScript): an access-control module combining RBAC, ABAC and maker-checker approvals across nine fintech roles; NIBSS-compliant session ID and transaction reference utilities validated against real transaction samples (including spec discrepancies found); correlation IDs for distributed tracing; integrations with Afriex and 9PSB.
 - Private repo: diagrams and short sanitised code excerpts only. **[Lucky]** confirm what can be shown publicly.

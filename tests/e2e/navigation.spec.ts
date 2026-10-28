@@ -13,13 +13,20 @@ test("dock appears after the hero and jumps to sections", async ({ page }) => {
 
 test("project card opens its case study", async ({ page }) => {
   await page.goto("/");
-  await page.locator("#work").scrollIntoViewIfNeeded();
-  // On desktop the sticky index panel shows the active card's link; scroll until DriftWatch is active.
+  // Centre the DriftWatch card so it is the active one (on desktop the sticky index panel shows
+  // the active card's link), then wait for smooth scrolling to settle before clicking.
+  await page
+    .locator('[data-project-card="2"]')
+    .evaluate((card) => card.scrollIntoView({ block: "center" }));
   const caseStudyLink = page.getByRole("link", { name: /Read case study: DriftWatch/ });
-  await expect(async () => {
-    if (!(await caseStudyLink.isVisible())) await page.mouse.wheel(0, 300);
-    await expect(caseStudyLink).toBeVisible({ timeout: 500 });
-  }).toPass({ timeout: 20_000 });
+  await expect(caseStudyLink).toBeVisible();
+  await page.waitForFunction(
+    () =>
+      new Promise((resolve) => {
+        const startY = window.scrollY;
+        setTimeout(() => resolve(window.scrollY === startY), 300);
+      }),
+  );
   await caseStudyLink.click();
   await expect(page).toHaveURL(/\/work\/driftwatch$/);
   await expect(page.getByRole("heading", { level: 1, name: "DriftWatch" })).toBeVisible();
